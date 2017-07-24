@@ -34,9 +34,6 @@ export default class ModernSpMegaMenuApplicationCustomizer
   @override
   public onRender(): void {
 
-    console.log('Available placeholders: ',
-      this.context.placeholders.placeholderNames.join(', '));
-
     if (!this._headerPlaceholder) {
       this._headerPlaceholder = this.context.placeholders.tryAttach(
         'PageHeader',
@@ -44,17 +41,19 @@ export default class ModernSpMegaMenuApplicationCustomizer
           onDispose: this._onDispose
         });
 
-      if (this._headerPlaceholder && this._headerPlaceholder.domElement) {
-
-        const element: React.ReactElement<IMegaMenuProps> = React.createElement(
-          MegaMenu,
-          {}
-        );
-
-        ReactDom.render(element, this._headerPlaceholder.domElement);
+      if (this._headerPlaceholder) {
+        if (this._headerPlaceholder.domElement) {
+          const element: React.ReactElement<IMegaMenuProps> = React.createElement(
+            MegaMenu,
+            {}
+          );
+          ReactDom.render(element, this._headerPlaceholder.domElement);
+        } else {
+          console.error('PageHeader placeholder has no DOM element.');
+        }
       }
       else {
-        console.error('Header placeholder not found.');
+        console.error('PageHeader placeholder not found.');
       }
 
     }
