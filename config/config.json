@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "entry": "./lib/extensions/modernSpMegaMenu/ModernSpMegaMenuApplicationCustomizer.js",
+      "manifest": "./src/extensions/modernSpMegaMenu/ModernSpMegaMenuApplicationCustomizer.manifest.json",
+      "outputPath": "./dist/modern-sp-mega-menu.bundle.js"
+    }
+  ],
+  "externals": {},
+  "localizedResources": {
+    "modernSpMegaMenuStrings": "extensions/modernSpMegaMenu/loc/{locale}.js"
+  }
+}

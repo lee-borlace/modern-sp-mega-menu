@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "version": "1.1.1",
+    "libraryName": "modern-sp-mega-menu",
+    "libraryId": "62ed767d-26fc-4ffe-8f31-b174537d545e",
+    "environment": "spo"
+  }
+}

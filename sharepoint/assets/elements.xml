@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction 
+        Title="Mega Menu for Modern SP"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="c8e19244-8f9d-45d9-806e-1b1d71ed53fb"
+        ClientSideComponentProperties="{}">
+    </CustomAction>
+</Elements>

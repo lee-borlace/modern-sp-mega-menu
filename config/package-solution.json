@@ -1,0 +1,24 @@
+{
+  "solution": {
+    "name": "Mega Menu for Modern SP",
+    "id": "62ed767d-26fc-4ffe-8f31-b174537d545e",
+    "version": "1.0.0.0",
+    "features": [
+      {
+        "title": "Mega Menu for Modern SP",
+        "description": "Mega Menu for Modern SP",
+        "id": "c93e2e29-6e44-4c4e-bbe5-23fe34ec200b",
+        "version": "1.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml"
+          ]
+        }
+      }
+    ]
+
+  },
+  "paths": {
+    "zippedPackage": "solution/modern-sp-mega-menu.sppkg"
+  }
+}

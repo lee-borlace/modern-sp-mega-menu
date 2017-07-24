@@ -1,47 +1,32 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+# Logs
+logs
+*.log
+npm-debug.log*
 
-# Folder config file
-Desktop.ini
+# Dependency directories
+node_modules
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# Build generated files
+dist
+lib
+solution
+temp
+*.sppkg
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# =========================
-# Operating System Files
-# =========================
+# Coverage directory used by tools like istanbul
+coverage
 
 # OSX
-# =========================
-
 .DS_Store
-.AppleDouble
-.LSOverride
 
-# Thumbnails
-._*
+# Visual Studio files
+.ntvs_analysis.dat
+.vs
+bin
+obj
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
+# Resx Generated Code
+*.resx.ts
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# Styles Generated Code
+*.scss.ts
