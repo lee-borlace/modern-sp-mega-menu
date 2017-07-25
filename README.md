@@ -1,26 +1,16 @@
-## modern-sp-mega-menu
+# modern-sp-mega-menu
 
-This is where you include your WebPart documentation.
+## Packaging and running locally
 
-### Building the code
+1. `gulp bundle`
+2. `gulp package-solution`
+3. `gulp serve --nobrowser`
+4. Upload to app catalog
 
-```bash
-git clone the repo
-npm i
-npm i -g gulp
-gulp
-```
+## Packaging and running from CDN
 
-This package produces the following:
+1. `gulp bundle --ship`
+2. `gulp package-solution --ship`
+3. Re-upload solution to app store.
+4. Manually upload the files from temp/deploy to the CDN folder created previously 
 
-* lib/* - intermediate-stage commonjs build artifacts
-* dist/* - the bundled script, along with other resources
-* deploy/* - all resources which should be uploaded to a CDN.
-
-### Build options
-
-gulp clean - TODO
-gulp test - TODO
-gulp serve - TODO
-gulp bundle - TODO
-gulp package-solution - TODO
