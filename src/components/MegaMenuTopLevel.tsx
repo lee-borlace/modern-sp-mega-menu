@@ -6,6 +6,7 @@ export interface IMegaMenuTopLevelProps {
     text: string;
     handleMouseEnter: (text: string) => void;
     handleMouseLeave: () => void;
+    selectedTopLevelMenu: string;
 }
 
 export interface IMegaMenuTopLevelState {
@@ -26,7 +27,7 @@ export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IM
             <div
                 className={`
                 ms-Grid-col 
-                ms-bgColor-themeSecondary--hover
+                ${this.props.selectedTopLevelMenu == this.props.text ? "ms-bgColor-themeSecondary" : "ms-bgColor-themePrimary"}
                 ms-lg2 
                 ms-sm12 
                 ms-textAlignCenter

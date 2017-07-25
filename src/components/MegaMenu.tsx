@@ -22,7 +22,12 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
     constructor(props) {
         super(props);
 
-        this.state = { showFlyout: false, cursorInTopLevelMenu: false, cursorInFlyout: false, megaMenuState: "" };
+        this.state = { 
+            showFlyout: false, 
+            cursorInTopLevelMenu: false, 
+            cursorInFlyout: false, 
+            megaMenuState: "",
+        };
 
         this.handleMouseEnterTopLevelMenu = this.handleMouseEnterTopLevelMenu.bind(this);
         this.handleMouseLeaveTopLevelMenu = this.handleMouseLeaveTopLevelMenu.bind(this);
@@ -43,10 +48,10 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
 
-                        <MegaMenuTopLevel text="Departments" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu}></MegaMenuTopLevel>
-                        <MegaMenuTopLevel text="People" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu}></MegaMenuTopLevel>
-                        <MegaMenuTopLevel text="Projects" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu}></MegaMenuTopLevel>
-                        <MegaMenuTopLevel text="Help" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu}></MegaMenuTopLevel>
+                        <MegaMenuTopLevel text="Departments" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu} selectedTopLevelMenu={this.state.megaMenuState}></MegaMenuTopLevel>
+                        <MegaMenuTopLevel text="People" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu} selectedTopLevelMenu={this.state.megaMenuState}></MegaMenuTopLevel>
+                        <MegaMenuTopLevel text="Projects" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu} selectedTopLevelMenu={this.state.megaMenuState}></MegaMenuTopLevel>
+                        <MegaMenuTopLevel text="Help" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu} selectedTopLevelMenu={this.state.megaMenuState}></MegaMenuTopLevel>
 
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
@@ -114,12 +119,16 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
 
     // Set visibility of flyout menu. Only visible if mouse is in a top-level menu or in the flyout itself.
     checkFlyoutVisibility() {
-        this.setState((prevState, props) => ({
-            showFlyout: prevState.cursorInTopLevelMenu || prevState.cursorInFlyout,
-            cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
-            cursorInFlyout: prevState.cursorInFlyout,
-            megaMenuState: prevState.megaMenuState
-        }));
+        this.setState((prevState, props) => {
+
+            var showFlyout = prevState.cursorInTopLevelMenu || prevState.cursorInFlyout; 
+
+            return {
+                showFlyout: showFlyout,
+                cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
+                cursorInFlyout: prevState.cursorInFlyout,
+                megaMenuState: showFlyout ? prevState.megaMenuState : ""
+        }});
     }
 
 
