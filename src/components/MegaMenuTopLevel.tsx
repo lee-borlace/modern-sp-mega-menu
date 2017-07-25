@@ -27,9 +27,10 @@ export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IM
                 className={`
                 ms-Grid-col 
                 ms-bgColor-themeSecondary--hover
-                ms-lg3 
+                ms-lg2 
                 ms-sm12 
                 ms-textAlignCenter
+                ms-fontSize-l
                 ${styles.container}
                 `}
 
