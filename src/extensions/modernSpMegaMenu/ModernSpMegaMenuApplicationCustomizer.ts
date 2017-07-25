@@ -33,7 +33,7 @@ export default class ModernSpMegaMenuApplicationCustomizer
 
   @override
   public onRender(): void {
-
+    
     if (!this._headerPlaceholder) {
       this._headerPlaceholder = this.context.placeholders.tryAttach(
         'PageHeader',
@@ -43,11 +43,17 @@ export default class ModernSpMegaMenuApplicationCustomizer
 
       if (this._headerPlaceholder) {
         if (this._headerPlaceholder.domElement) {
+
+          console.log("PageHeader placeholder is OK.")
+
           const element: React.ReactElement<IMegaMenuProps> = React.createElement(
             MegaMenu,
             {}
           );
           ReactDom.render(element, this._headerPlaceholder.domElement);
+
+          
+
         } else {
           console.error('PageHeader placeholder has no DOM element.');
         }
