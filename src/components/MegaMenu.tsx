@@ -106,7 +106,7 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
         this.checkFlyoutVisibility();
     }
 
-
+    // Set visibility of flyout menu. Only visible if mouse is in a top-level menu or in the flyout itself.
     checkFlyoutVisibility() {
         this.setState((prevState, props) => ({
             showFlyout: prevState.cursorInTopLevelMenu || prevState.cursorInFlyout,

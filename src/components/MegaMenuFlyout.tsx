@@ -21,12 +21,42 @@ export class MegaMenuFlyout extends React.Component<IMegaMenuFlyoutProps, IMegaM
 
         return (
             <div
-                className={`ms-Grid-col ms-lg12 ms-bgColor-themeLighterAlt ${styles.container}`}
+                className={`ms-Grid-col ms-lg12 ms-sm12 ms-bgColor-themeLighterAlt ${styles.container}`}
                 onMouseEnter={this.props.handleMouseEnter}
                 onMouseLeave={this.props.handleMouseLeave}
             >
-                This is the flyout!<br /><br /><br /><br />
-                {this.props.text}
+                <div className="ms-Grid">
+                    <div className="ms-Grid-row">
+                        <div className="ms-Grid-col ms-lg3 ms-sm12">
+                            Showing flyout for {this.props.text} <br />
+                            <strong>Heading 1</strong><br />
+                            A<br />
+                            B<br />
+                            C<br />
+                        </div>
+
+                        <div className="ms-Grid-col ms-lg3 ms-sm12">
+                            <strong>Heading 2</strong><br />
+                            A<br />
+                            B<br />
+                            C<br />
+                        </div>
+
+                        <div className="ms-Grid-col ms-lg3 ms-sm12">
+                            <strong>Heading 3</strong><br />
+                            A<br />
+                            B<br />
+                            C<br />
+                        </div>
+
+                        <div className="ms-Grid-col ms-lg3 ms-sm12">
+                            <strong>Heading 4</strong><br />
+                            A<br />
+                            B<br />
+                            C<br />
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

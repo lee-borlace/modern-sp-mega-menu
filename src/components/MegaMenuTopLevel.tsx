@@ -34,6 +34,8 @@ export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IM
                 `}
 
                 onMouseEnter={this.handleMouseEnter}
+                onClick={this.handleMouseEnter}
+                onTouchStart={this.handleMouseEnter}
                 onMouseLeave={this.props.handleMouseLeave}
             >
                 {this.props.text}
