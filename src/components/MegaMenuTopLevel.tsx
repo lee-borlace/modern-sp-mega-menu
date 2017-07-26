@@ -3,10 +3,11 @@ import * as React from 'react';
 import styles from './MegaMenuTopLevel.module.scss';
 
 export interface IMegaMenuTopLevelProps {
+    id: number;
     text: string;
-    handleMouseEnter: (text: string) => void;
-    handleMouseLeave: () => void;
-    selectedTopLevelMenu: string;
+    handleFocused: (id: number) => void;
+    handleLostFocus: () => void;
+    selectedTopLevelMenuId: number;
 }
 
 export interface IMegaMenuTopLevelState {
@@ -18,7 +19,7 @@ export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IM
     constructor(props) {
         super(props);
 
-        this.handleMouseEnter = this.handleMouseEnter.bind(this);
+        this.handleFocused = this.handleFocused.bind(this);
     }
 
     public render(): React.ReactElement<IMegaMenuTopLevelProps> {
@@ -27,7 +28,7 @@ export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IM
             <div
                 className={`
                 ms-Grid-col 
-                ${this.props.selectedTopLevelMenu == this.props.text ? "ms-bgColor-themeSecondary" : "ms-bgColor-themePrimary"}
+                ${this.props.selectedTopLevelMenuId == this.props.id ? "ms-bgColor-themeSecondary" : "ms-bgColor-themePrimary"}
                 ms-lg2 
                 ms-sm12 
                 ms-textAlignCenter
@@ -35,18 +36,18 @@ export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IM
                 ${styles.container}
                 `}
 
-                onMouseEnter={this.handleMouseEnter}
-                onClick={this.handleMouseEnter}
-                onTouchStart={this.handleMouseEnter}
-                onMouseLeave={this.props.handleMouseLeave}
+                onMouseEnter={this.handleFocused}
+                onClick={this.handleFocused}
+                onTouchStart={this.handleFocused}
+                onMouseLeave={this.props.handleLostFocus}
             >
                 {this.props.text}
             </div>
         );
     }
 
-    handleMouseEnter() {
-        this.props.handleMouseEnter(this.props.text);
+    handleFocused() {
+        this.props.handleFocused(this.props.id);
     }
 
 }

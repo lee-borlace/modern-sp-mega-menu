@@ -14,7 +14,7 @@ export interface IMegaMenuState {
     showFlyout: boolean;
     cursorInTopLevelMenu: boolean;
     cursorInFlyout: boolean;
-    megaMenuState: string;
+    selectedTopLevelMenuId: number;
 }
 
 export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
@@ -26,13 +26,14 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
             showFlyout: false, 
             cursorInTopLevelMenu: false, 
             cursorInFlyout: false, 
-            megaMenuState: "",
+            selectedTopLevelMenuId: 0,
         };
 
-        this.handleMouseEnterTopLevelMenu = this.handleMouseEnterTopLevelMenu.bind(this);
-        this.handleMouseLeaveTopLevelMenu = this.handleMouseLeaveTopLevelMenu.bind(this);
-        this.handleMouseEnterFlyout = this.handleMouseEnterFlyout.bind(this);
-        this.handleMouseLeaveFlyout = this.handleMouseLeaveFlyout.bind(this);
+        // These are needed to ensure "this" resolves in the functions.
+        this.handleFocusedTopLevelMenu = this.handleFocusedTopLevelMenu.bind(this);
+        this.handleLostFocusTopLevelMenu = this.handleLostFocusTopLevelMenu.bind(this);
+        this.handleFocusedFlyout = this.handleFocusedFlyout.bind(this);
+        this.handleLostFocusFlyout = this.handleLostFocusFlyout.bind(this);
     }
 
 
@@ -48,10 +49,10 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
 
-                        <MegaMenuTopLevel text="Departments" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu} selectedTopLevelMenu={this.state.megaMenuState}></MegaMenuTopLevel>
-                        <MegaMenuTopLevel text="People" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu} selectedTopLevelMenu={this.state.megaMenuState}></MegaMenuTopLevel>
-                        <MegaMenuTopLevel text="Projects" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu} selectedTopLevelMenu={this.state.megaMenuState}></MegaMenuTopLevel>
-                        <MegaMenuTopLevel text="Help" handleMouseEnter={this.handleMouseEnterTopLevelMenu} handleMouseLeave={this.handleMouseLeaveTopLevelMenu} selectedTopLevelMenu={this.state.megaMenuState}></MegaMenuTopLevel>
+                        <MegaMenuTopLevel text="Departments" id={1} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></MegaMenuTopLevel>
+                        <MegaMenuTopLevel text="People" id={2} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></MegaMenuTopLevel>
+                        <MegaMenuTopLevel text="Projects" id={3} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></MegaMenuTopLevel>
+                        <MegaMenuTopLevel text="Help" id={4} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></MegaMenuTopLevel>
 
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
@@ -61,9 +62,9 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
 
                 {this.state.showFlyout &&
                     <MegaMenuFlyout
-                        handleMouseEnter={this.handleMouseEnterFlyout}
-                        handleMouseLeave={this.handleMouseLeaveFlyout}
-                        text={this.state.megaMenuState}
+                        handleFocused={this.handleFocusedFlyout}
+                        handleLostFocus={this.handleLostFocusFlyout}
+                        id={this.state.selectedTopLevelMenuId}
                     >
                     </MegaMenuFlyout>
                 }
@@ -73,45 +74,45 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
     }
 
 
-    handleMouseEnterTopLevelMenu(text: string) {
+    handleFocusedTopLevelMenu(id:number) {
         this.setState((prevState, props) => ({
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: true,
             cursorInFlyout: prevState.cursorInFlyout,
-            megaMenuState: text
+            selectedTopLevelMenuId: id
         }));
 
         this.checkFlyoutVisibility();
     }
 
-    handleMouseLeaveTopLevelMenu() {
+    handleLostFocusTopLevelMenu() {
         this.setState((prevState, props) => ({
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: false,
             cursorInFlyout: prevState.cursorInFlyout,
-            megaMenuState: prevState.megaMenuState
+            selectedTopLevelMenuId: prevState.selectedTopLevelMenuId
         }));
 
         this.checkFlyoutVisibility();
     }
 
-    handleMouseEnterFlyout() {
+    handleFocusedFlyout(id:number) {
         this.setState((prevState, props) => ({
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
             cursorInFlyout: true,
-            megaMenuState: prevState.megaMenuState
+            selectedTopLevelMenuId: id
         }));
 
         this.checkFlyoutVisibility();
     }
 
-    handleMouseLeaveFlyout() {
+    handleLostFocusFlyout() {
         this.setState((prevState, props) => ({
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
             cursorInFlyout: false,
-            megaMenuState: prevState.megaMenuState
+            selectedTopLevelMenuId: prevState.selectedTopLevelMenuId
         }));
 
         this.checkFlyoutVisibility();
@@ -127,7 +128,7 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                 showFlyout: showFlyout,
                 cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
                 cursorInFlyout: prevState.cursorInFlyout,
-                megaMenuState: showFlyout ? prevState.megaMenuState : ""
+                selectedTopLevelMenuId: showFlyout ? prevState.selectedTopLevelMenuId : 0
         }});
     }
 

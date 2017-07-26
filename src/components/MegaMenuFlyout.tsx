@@ -3,9 +3,9 @@ import * as React from 'react';
 import styles from './MegaMenuFlyout.module.scss';
 
 export interface IMegaMenuFlyoutProps {
-    text: string;
-    handleMouseEnter: () => void;
-    handleMouseLeave: () => void;
+    id: number;
+    handleFocused: (id:number) => void;
+    handleLostFocus: () => void;
 }
 
 export interface IMegaMenuFlyoutState {
@@ -15,6 +15,7 @@ export class MegaMenuFlyout extends React.Component<IMegaMenuFlyoutProps, IMegaM
 
     constructor(props) {
         super(props);
+        this.handleFocused = this.handleFocused.bind(this);
     }
 
     public render(): React.ReactElement<IMegaMenuFlyoutProps> {
@@ -22,8 +23,10 @@ export class MegaMenuFlyout extends React.Component<IMegaMenuFlyoutProps, IMegaM
         return (
             <div
                 className={`ms-Grid-col ms-lg12 ms-sm12 ms-bgColor-themeLighterAlt ms-slideDownIn10 ${styles.container}`}
-                onMouseEnter={this.props.handleMouseEnter}
-                onMouseLeave={this.props.handleMouseLeave}
+                onMouseEnter={this.handleFocused}
+                onClick={this.handleFocused}
+                onTouchStart={this.handleFocused}
+                onMouseLeave={this.props.handleLostFocus}
             >
                 <div className="ms-Grid">
                     <div className="ms-Grid-row">
@@ -32,7 +35,7 @@ export class MegaMenuFlyout extends React.Component<IMegaMenuFlyoutProps, IMegaM
                         </div>
 
                         <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontSize-mp">
-                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.text}</div>
+                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.id}</div>
                             <div className={`${styles.item}`}>Lorem ipsum dolor</div>
                             <div className={`${styles.item}`}>sit amet consectetur</div>
                             <div className={`${styles.item}`}>adipiscing elit</div>
@@ -40,7 +43,7 @@ export class MegaMenuFlyout extends React.Component<IMegaMenuFlyoutProps, IMegaM
                         </div>
 
                         <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontSize-mp">
-                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.text}</div>
+                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.id}</div>
                             <div className={`${styles.item}`}>Lorem ipsum dolor</div>
                             <div className={`${styles.item}`}>sit amet consectetur</div>
                             <div className={`${styles.item}`}>adipiscing elit</div>
@@ -48,7 +51,7 @@ export class MegaMenuFlyout extends React.Component<IMegaMenuFlyoutProps, IMegaM
                         </div>
 
                         <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontSize-mp">
-                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.text}</div>
+                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.id}</div>
                             <div className={`${styles.item}`}>Lorem ipsum dolor</div>
                             <div className={`${styles.item}`}>sit amet consectetur</div>
                             <div className={`${styles.item}`}>adipiscing elit</div>
@@ -56,7 +59,7 @@ export class MegaMenuFlyout extends React.Component<IMegaMenuFlyoutProps, IMegaM
                         </div>
 
                         <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontSize-mp">
-                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.text}</div>
+                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.id}</div>
                             <div className={`${styles.item}`}>Lorem ipsum dolor</div>
                             <div className={`${styles.item}`}>sit amet consectetur</div>
                             <div className={`${styles.item}`}>adipiscing elit</div>
@@ -70,6 +73,10 @@ export class MegaMenuFlyout extends React.Component<IMegaMenuFlyoutProps, IMegaM
                 </div>
             </div>
         );
+    }
+
+     handleFocused() {
+        this.props.handleFocused(this.props.id);
     }
 
 }
