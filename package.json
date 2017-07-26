@@ -6,11 +6,12 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
+    "@microsoft/sp-application-base": "1.1.1",
     "@microsoft/sp-core-library": "~1.1.0",
+    "@microsoft/sp-listview-extensibility": "0.1.1",
     "@microsoft/sp-webpart-base": "~1.1.1",
     "@types/webpack-env": ">=1.12.1 <1.14.0",
-    "@microsoft/sp-listview-extensibility": "0.1.1",
-    "@microsoft/sp-application-base": "1.1.1"
+    "sp-pnp-js": "^2.0.7"
   },
   "devDependencies": {
     "@microsoft/sp-build-web": "~1.1.0",

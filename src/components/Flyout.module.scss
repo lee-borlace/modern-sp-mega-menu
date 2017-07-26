@@ -1,9 +1,10 @@
 .container {
-    position:fixed;
-    z-index:5000;
+   
 
     @media screen {
         padding-top: 30px;
         padding-bottom: 30px;
+        position:fixed;
+        z-index:5000;
     }
 }
