@@ -6,15 +6,19 @@ import { Flyout } from './Flyout';
 
 import styles from './MegaMenu.module.scss';
 
+import { TopLevelMenu as TopLevelMenuModel } from '../model/TopLevelMenu';
+import { FlyoutColumn as FlyoutColumnModel } from '../model/FlyoutColumn';
+import { Link as LinkModel } from '../model/Link';
 
 export interface IMegaMenuProps {
+    topLevelMenuItems:TopLevelMenuModel[];
 }
 
 export interface IMegaMenuState {
     showFlyout: boolean;
     cursorInTopLevelMenu: boolean;
     cursorInFlyout: boolean;
-    selectedTopLevelMenuId: number;
+    selectedTopLevelItem: TopLevelMenuModel;
 }
 
 export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
@@ -26,7 +30,7 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
             showFlyout: false, 
             cursorInTopLevelMenu: false, 
             cursorInFlyout: false, 
-            selectedTopLevelMenuId: 0,
+            selectedTopLevelItem: null,
         };
 
         // These are needed to ensure "this" resolves in the functions.
@@ -39,6 +43,16 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
 
     public render(): React.ReactElement<IMegaMenuProps> {
 
+        const topLevelItems = this.props.topLevelMenuItems.map((item:TopLevelMenuModel) => 
+            <TopLevelMenu 
+                key={item.id.toString()}
+                topLevelMenu={item}
+                handleFocused={this.handleFocusedTopLevelMenu} 
+                handleLostFocus={this.handleLostFocusTopLevelMenu} 
+                selectedTopLevelMenuId={this.state.selectedTopLevelItem ? this.state.selectedTopLevelItem.id : 0}>
+            </TopLevelMenu>
+        );
+
         return (
             <div>
                 <div className={
@@ -49,11 +63,8 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
 
-                        <TopLevelMenu text="Departments" id={1} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></TopLevelMenu>
-                        <TopLevelMenu text="People" id={2} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></TopLevelMenu>
-                        <TopLevelMenu text="Projects" id={3} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></TopLevelMenu>
-                        <TopLevelMenu text="Help" id={4} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></TopLevelMenu>
-
+                        {topLevelItems}
+                     
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
 
@@ -64,7 +75,7 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                     <Flyout
                         handleFocused={this.handleFocusedFlyout}
                         handleLostFocus={this.handleLostFocusFlyout}
-                        id={this.state.selectedTopLevelMenuId}
+                        topLevelItem={this.state.selectedTopLevelItem}
                     >
                     </Flyout>
                 }
@@ -74,12 +85,12 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
     }
 
 
-    handleFocusedTopLevelMenu(id:number) {
+    handleFocusedTopLevelMenu(selectedTopLevelItem:TopLevelMenuModel) {
         this.setState((prevState, props) => ({
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: true,
             cursorInFlyout: prevState.cursorInFlyout,
-            selectedTopLevelMenuId: id
+            selectedTopLevelItem: selectedTopLevelItem
         }));
 
         this.checkFlyoutVisibility();
@@ -90,18 +101,18 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: false,
             cursorInFlyout: prevState.cursorInFlyout,
-            selectedTopLevelMenuId: prevState.selectedTopLevelMenuId
+            selectedTopLevelItem: prevState.selectedTopLevelItem
         }));
 
         this.checkFlyoutVisibility();
     }
 
-    handleFocusedFlyout(id:number) {
+    handleFocusedFlyout(selectedTopLevelItem:TopLevelMenuModel) {
         this.setState((prevState, props) => ({
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
             cursorInFlyout: true,
-            selectedTopLevelMenuId: id
+            selectedTopLevelItem: selectedTopLevelItem
         }));
 
         this.checkFlyoutVisibility();
@@ -112,7 +123,7 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
             cursorInFlyout: false,
-            selectedTopLevelMenuId: prevState.selectedTopLevelMenuId
+            selectedTopLevelItem: prevState.selectedTopLevelItem
         }));
 
         this.checkFlyoutVisibility();
@@ -128,7 +139,7 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                 showFlyout: showFlyout,
                 cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
                 cursorInFlyout: prevState.cursorInFlyout,
-                selectedTopLevelMenuId: showFlyout ? prevState.selectedTopLevelMenuId : 0
+                selectedTopLevelItem: showFlyout ? prevState.selectedTopLevelItem : null
         }});
     }
 

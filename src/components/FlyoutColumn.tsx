@@ -4,7 +4,13 @@ import styles from './FlyoutColumn.module.scss';
 import { FlyoutColumnHeading } from './FlyoutColumnHeading';
 import { MenuLink } from './MenuLink';
 
+import { TopLevelMenu as TopLevelMenuModel } from '../model/TopLevelMenu';
+import { FlyoutColumn as FlyoutColumnModel } from '../model/FlyoutColumn';
+import { Link as LinkModel } from '../model/Link';
+
 export interface IFlyoutColumnProps {
+    header:LinkModel;
+    links:LinkModel[];
 }
 
 export interface IFlyoutColumnState {
@@ -18,38 +24,21 @@ export class FlyoutColumn extends React.Component<IFlyoutColumnProps, IFlyoutCol
 
     public render(): React.ReactElement<IFlyoutColumnProps> {
 
+         const links = this.props.links.map((item:LinkModel) => 
+            <MenuLink
+                item={item}
+            >
+            </MenuLink>
+        );
+
         return (
             <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontColor-neutralPrimary">
                 <FlyoutColumnHeading
-                    text="Google"
-                    url="http://www.google.com.au"
-                    openInNewTab={false}
+                    item={this.props.header}
                 ></FlyoutColumnHeading>
 
-                <MenuLink
-                    text="Google"
-                    url="http://www.google.com.au"
-                    openInNewTab={false}
-                ></MenuLink>
-
-                <MenuLink
-                    text="Microsoft"
-                    url="http://www.google.com.au"
-                    openInNewTab={false}
-                ></MenuLink>
-
-                <MenuLink
-                    text="Azure"
-                    url="http://www.google.com.au"
-                    openInNewTab={false}
-                ></MenuLink>
-
-                <MenuLink
-                    text="Amazon"
-                    url="http://www.google.com.au"
-                    openInNewTab={false}
-                ></MenuLink>
-
+                {links}
+               
             </div>
         );
     }

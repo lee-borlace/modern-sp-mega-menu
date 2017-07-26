@@ -2,10 +2,13 @@ import * as React from 'react';
 
 import styles from './TopLevelMenu.module.scss';
 
+import { TopLevelMenu as TopLevelMenuModel } from '../model/TopLevelMenu';
+import { FlyoutColumn as FlyoutColumnModel } from '../model/FlyoutColumn';
+import { Link as LinkModel } from '../model/Link';
+
 export interface ITopLevelMenuProps {
-    id: number;
-    text: string;
-    handleFocused: (id: number) => void;
+    topLevelMenu: TopLevelMenuModel;
+    handleFocused: (topLevelMenu: TopLevelMenuModel) => void;
     handleLostFocus: () => void;
     selectedTopLevelMenuId: number;
 }
@@ -28,7 +31,7 @@ export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelM
             <div
                 className={`
                 ms-Grid-col 
-                ${this.props.selectedTopLevelMenuId == this.props.id ? "ms-bgColor-themeSecondary" : "ms-bgColor-themePrimary"}
+                ${this.props.selectedTopLevelMenuId == this.props.topLevelMenu.id ? "ms-bgColor-themeSecondary" : "ms-bgColor-themePrimary"}
                 ms-lg2 
                 ms-sm12 
                 ms-textAlignCenter
@@ -42,13 +45,13 @@ export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelM
                 onTouchStart={this.handleMouseEnter}
                 onMouseLeave={this.props.handleLostFocus}
             >
-                {this.props.text}
+                {this.props.topLevelMenu.text}
             </div>
         );
     }
 
     handleMouseEnter() {
-        this.props.handleFocused(this.props.id);
+        this.props.handleFocused(this.props.topLevelMenu);
     }
 
 }

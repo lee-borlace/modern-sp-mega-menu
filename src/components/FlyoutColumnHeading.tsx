@@ -3,10 +3,12 @@ import { Link } from 'office-ui-fabric-react/lib/Link';
 
 import styles from './FlyoutColumnHeading.module.scss';
 
+import { TopLevelMenu as TopLevelMenuModel } from '../model/TopLevelMenu';
+import { FlyoutColumn as FlyoutColumnModel } from '../model/FlyoutColumn';
+import { Link as LinkModel } from '../model/Link';
+
 export interface IFlyoutColumnHeadingProps {
-    text: string;
-    url?: string;
-    openInNewTab?: boolean
+    item:LinkModel;
 }
 
 export interface IFlyoutColumnHeadingState {
@@ -21,14 +23,14 @@ export class FlyoutColumnHeading extends React.Component<IFlyoutColumnHeadingPro
     public render(): React.ReactElement<IFlyoutColumnHeadingProps> {
 
         // Heading has a link.
-        if (this.props.url) {
+        if (this.props.item.url) {
             return (
                 <Link
                     className={`${styles.headingLink} ms-fontWeight-semibold ms-fontSize-l`}
-                    href={this.props.url}
-                    target={this.props.openInNewTab ? "_blank" : ""}
+                    href={this.props.item.url}
+                    target={this.props.item.openInNewTab ? "_blank" : ""}
                 >
-                    {this.props.text}
+                    {this.props.item.text}
                 </Link>
             );
         }
@@ -38,7 +40,7 @@ export class FlyoutColumnHeading extends React.Component<IFlyoutColumnHeadingPro
                 <div
                     className={`${styles.headingNoLink} ms-fontWeight-semibold ms-fontSize-l`}
                 >
-                    {this.props.text}
+                    {this.props.item.text}
                 </div>
             );
         }

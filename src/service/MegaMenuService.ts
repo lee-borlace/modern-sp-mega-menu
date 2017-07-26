@@ -16,7 +16,6 @@ export class MegaMenuService {
     }
 
     private static getSampleData(): TopLevelMenu[] {
-
         return [
             {
                 id: 1,

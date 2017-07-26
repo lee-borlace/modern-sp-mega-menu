@@ -9,22 +9,18 @@ import * as ReactDom from 'react-dom';
 
 import * as strings from 'modernSpMegaMenuStrings';
 import { MegaMenu, IMegaMenuProps } from '../../components/MegaMenu';
+import { MegaMenuService } from '../../service/MegaMenuService';
+import { TopLevelMenu } from '../../model/TopLevelMenu';
 
-const LOG_SOURCE: string = 'ModernSpMegaMenuApplicationCustomizer';
-
-/**
- * If your command set uses the ClientSideComponentProperties JSON input,
- * it will be deserialized into the BaseExtension.properties object.
- * You can define an interface to describe it.
- */
 export interface IModernSpMegaMenuApplicationCustomizerProperties {
 }
 
-/** A Custom Action which can be run during execution of a Client Side Application */
 export default class ModernSpMegaMenuApplicationCustomizer
   extends BaseApplicationCustomizer<IModernSpMegaMenuApplicationCustomizerProperties> {
 
-  private _headerPlaceholder: Placeholder;
+  private headerPlaceholder: Placeholder;
+
+  private readonly menuListName: string = "Mega Menu";
 
   @override
   public onInit(): Promise<void> {
@@ -33,26 +29,35 @@ export default class ModernSpMegaMenuApplicationCustomizer
 
   @override
   public onRender(): void {
-    
-    if (!this._headerPlaceholder) {
-      this._headerPlaceholder = this.context.placeholders.tryAttach(
+
+    if (!this.headerPlaceholder) {
+      this.headerPlaceholder = this.context.placeholders.tryAttach(
         'PageHeader',
         {
           onDispose: this._onDispose
         });
 
-      if (this._headerPlaceholder) {
-        if (this._headerPlaceholder.domElement) {
+      if (this.headerPlaceholder) {
+        if (this.headerPlaceholder.domElement) {
 
           console.log("PageHeader placeholder is OK.")
 
-          const element: React.ReactElement<IMegaMenuProps> = React.createElement(
-            MegaMenu,
-            {}
-          );
-          ReactDom.render(element, this._headerPlaceholder.domElement);
 
-          
+          MegaMenuService.getMenuItems(this.menuListName)
+          .then((topLevelMenus: TopLevelMenu[]) => {
+
+            const element: React.ReactElement<IMegaMenuProps> = React.createElement(
+              MegaMenu,
+              {
+                topLevelMenuItems : topLevelMenus
+              });
+
+            ReactDom.render(element, this.headerPlaceholder.domElement);
+            
+          })
+          // .catch((error:any) => {
+          //   console.error(`Error trying to read menu items or rendering component : ${error.message}`);
+          // });
 
         } else {
           console.error('PageHeader placeholder has no DOM element.');

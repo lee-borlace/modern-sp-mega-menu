@@ -4,10 +4,15 @@ import styles from './Flyout.module.scss';
 
 import { FlyoutColumn } from './FlyoutColumn';
 
+import { TopLevelMenu as TopLevelMenuModel } from '../model/TopLevelMenu';
+import { FlyoutColumn as FlyoutColumnModel } from '../model/FlyoutColumn';
+import { Link as LinkModel } from '../model/Link';
+
 export interface IFlyoutProps {
-    id: number;
-    handleFocused: (id:number) => void;
+    topLevelItem: TopLevelMenuModel;
+    handleFocused: (topLevelItem:TopLevelMenuModel) => void;
     handleLostFocus: () => void;
+
 }
 
 export interface IFlyoutState {
@@ -21,6 +26,14 @@ export class Flyout extends React.Component<IFlyoutProps, IFlyoutState> {
     }
 
     public render(): React.ReactElement<IFlyoutProps> {
+
+         const columns = this.props.topLevelItem.columns.map((column:FlyoutColumnModel) => 
+            <FlyoutColumn
+                header={column.heading}
+                links={column.links}
+            >
+            </FlyoutColumn>
+        );
 
         return (
             <div
@@ -36,10 +49,7 @@ export class Flyout extends React.Component<IFlyoutProps, IFlyoutState> {
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
 
-                        <FlyoutColumn></FlyoutColumn>
-                        <FlyoutColumn></FlyoutColumn>
-                        <FlyoutColumn></FlyoutColumn>
-                        <FlyoutColumn></FlyoutColumn>
+                        {columns}
 
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
@@ -50,7 +60,7 @@ export class Flyout extends React.Component<IFlyoutProps, IFlyoutState> {
     }
 
      handleFocused() {
-        this.props.handleFocused(this.props.id);
+        this.props.handleFocused(this.props.topLevelItem);
     }
 
 }

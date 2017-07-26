@@ -3,10 +3,12 @@ import { Link } from 'office-ui-fabric-react/lib/Link';
 
 import styles from './MenuLink.module.scss';
 
+import { TopLevelMenu as TopLevelMenuModel } from '../model/TopLevelMenu';
+import { FlyoutColumn as FlyoutColumnModel } from '../model/FlyoutColumn';
+import { Link as LinkModel } from '../model/Link';
+
 export interface IMenuLinkProps {
-    text: string;
-    url: string;
-    openInNewTab: boolean
+    item:LinkModel;
 }
 
 export interface IMenuLinkState {
@@ -23,10 +25,10 @@ export class MenuLink extends React.Component<IMenuLinkProps, IMenuLinkState> {
        return (
             <Link  
                 className={`${styles.link} ms-fontColor-neutralPrimary ms-fontSize-mp`}
-                href={this.props.url}
-                target={this.props.openInNewTab ? "_blank" : ""}
+                href={this.props.item.url}
+                target={this.props.item.openInNewTab ? "_blank" : ""}
             >
-                {this.props.text}
+                {this.props.item.text}
             </Link>
             );
     }
