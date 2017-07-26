@@ -22,7 +22,7 @@ export class MegaMenuService {
                 text: "Organisation",
                 columns: [
                     {
-                        heading: { text: "Corporate" },
+                        heading: { text: "Corporate", url:"/", openInNewTab:false },
                         links: [
                             { text: "Finance", url: "/", openInNewTab: false },
                             { text: "Information Services", url: "/", openInNewTab: false },
