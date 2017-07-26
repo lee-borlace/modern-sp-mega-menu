@@ -43,9 +43,9 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
             <div>
                 <div className={
                     `ms-Grid 
-                    ms-bgColor-themePrimary 
-                    ms-fontColor-themeLighterAlt`}>
+                    ms-bgColor-themePrimary`}>
                     <div className="ms-Grid-row">
+                        
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
 

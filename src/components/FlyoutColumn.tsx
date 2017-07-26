@@ -19,7 +19,7 @@ export class FlyoutColumn extends React.Component<IFlyoutColumnProps, IFlyoutCol
     public render(): React.ReactElement<IFlyoutColumnProps> {
 
         return (
-            <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontSize-mp">
+            <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontColor-neutralPrimary">
                 <FlyoutColumnHeading
                     text="Google"
                     url="http://www.google.com.au"

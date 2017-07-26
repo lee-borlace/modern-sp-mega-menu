@@ -19,7 +19,7 @@ export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IM
     constructor(props) {
         super(props);
 
-        this.handleFocused = this.handleFocused.bind(this);
+        this.handleMouseEnter = this.handleMouseEnter.bind(this);
     }
 
     public render(): React.ReactElement<IMegaMenuTopLevelProps> {
@@ -33,12 +33,13 @@ export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IM
                 ms-sm12 
                 ms-textAlignCenter
                 ms-fontSize-l
+                 ms-fontColor-themeLighterAlt
                 ${styles.container}
                 `}
 
-                onMouseEnter={this.handleFocused}
-                onClick={this.handleFocused}
-                onTouchStart={this.handleFocused}
+                onMouseEnter={this.handleMouseEnter}
+                onClick={this.handleMouseEnter}
+                onTouchStart={this.handleMouseEnter}
                 onMouseLeave={this.props.handleLostFocus}
             >
                 {this.props.text}
@@ -46,7 +47,7 @@ export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IM
         );
     }
 
-    handleFocused() {
+    handleMouseEnter() {
         this.props.handleFocused(this.props.id);
     }
 

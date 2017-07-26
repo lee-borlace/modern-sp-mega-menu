@@ -5,8 +5,8 @@ import styles from './FlyoutColumnHeading.module.scss';
 
 export interface IFlyoutColumnHeadingProps {
     text: string;
-    url: string;
-    openInNewTab: boolean
+    url?: string;
+    openInNewTab?: boolean
 }
 
 export interface IFlyoutColumnHeadingState {
@@ -24,7 +24,7 @@ export class FlyoutColumnHeading extends React.Component<IFlyoutColumnHeadingPro
         if (this.props.url) {
             return (
                 <Link
-                    className={`${styles.headingLink} ms-fontWeight-semibold`}
+                    className={`${styles.headingLink} ms-fontWeight-semibold ms-fontSize-l`}
                     href={this.props.url}
                     target={this.props.openInNewTab ? "_blank" : ""}
                 >
@@ -36,7 +36,7 @@ export class FlyoutColumnHeading extends React.Component<IFlyoutColumnHeadingPro
         else {
             return (
                 <div
-                    className={`${styles.headingNoLink} ms-fontWeight-semibold`}
+                    className={`${styles.headingNoLink} ms-fontWeight-semibold ms-fontSize-l`}
                 >
                     {this.props.text}
                 </div>

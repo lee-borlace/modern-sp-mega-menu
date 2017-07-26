@@ -1,7 +1,8 @@
-.headingLink {
+.headingLink, .headingNoLink {
     padding-bottom: 10px;
+    display:block;
 }
 
-.headingNoLink {
-    padding-bottom: 10px;
+.headingLink, .headingLink:visited, .headingLink:hover, .headingLink:active, .headingNoLink, .headingNoLink:visited, .headingNoLink:hover, .headingNoLink:active {
+  color: inherit;
 }

@@ -22,7 +22,7 @@ export class FlyoutColumnLink extends React.Component<IFlyoutColumnLinkProps, IF
 
        return (
             <Link  
-                className={`${styles.link} ms-fontWeight-semibold`}
+                className={`${styles.link} ms-fontColor-neutralPrimary ms-fontSize-mp`}
                 href={this.props.url}
                 target={this.props.openInNewTab ? "_blank" : ""}
             >
