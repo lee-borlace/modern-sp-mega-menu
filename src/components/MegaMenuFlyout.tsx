@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import styles from './MegaMenuFlyout.module.scss';
 
+import { FlyoutColumn } from './FlyoutColumn';
+
 export interface IMegaMenuFlyoutProps {
     id: number;
     handleFocused: (id:number) => void;
@@ -34,38 +36,10 @@ export class MegaMenuFlyout extends React.Component<IMegaMenuFlyoutProps, IMegaM
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
 
-                        <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontSize-mp">
-                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.id}</div>
-                            <div className={`${styles.item}`}>Lorem ipsum dolor</div>
-                            <div className={`${styles.item}`}>sit amet consectetur</div>
-                            <div className={`${styles.item}`}>adipiscing elit</div>
-                            <div className={`${styles.item}`}>Fusce tincidunt</div>
-                        </div>
-
-                        <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontSize-mp">
-                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.id}</div>
-                            <div className={`${styles.item}`}>Lorem ipsum dolor</div>
-                            <div className={`${styles.item}`}>sit amet consectetur</div>
-                            <div className={`${styles.item}`}>adipiscing elit</div>
-                            <div className={`${styles.item}`}>Fusce tincidunt</div>
-                        </div>
-
-                        <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontSize-mp">
-                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.id}</div>
-                            <div className={`${styles.item}`}>Lorem ipsum dolor</div>
-                            <div className={`${styles.item}`}>sit amet consectetur</div>
-                            <div className={`${styles.item}`}>adipiscing elit</div>
-                            <div className={`${styles.item}`}>Fusce tincidunt</div>
-                        </div>
-
-                        <div className="ms-Grid-col ms-lg2 ms-sm12 ms-fontSize-mp">
-                            <div className={`${styles.heading} ms-fontWeight-semibold`}>{this.props.id}</div>
-                            <div className={`${styles.item}`}>Lorem ipsum dolor</div>
-                            <div className={`${styles.item}`}>sit amet consectetur</div>
-                            <div className={`${styles.item}`}>adipiscing elit</div>
-                            <div className={`${styles.item}`}>Fusce tincidunt</div>
-                        </div>
-
+                        <FlyoutColumn></FlyoutColumn>
+                        <FlyoutColumn></FlyoutColumn>
+                        <FlyoutColumn></FlyoutColumn>
+                        <FlyoutColumn></FlyoutColumn>
 
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
