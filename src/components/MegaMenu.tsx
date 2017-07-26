@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Layer, LayerHost } from 'office-ui-fabric-react/lib/Layer';
 
-import { MegaMenuTopLevel } from './MegaMenuTopLevel';
-import { MegaMenuFlyout } from './MegaMenuFlyout';
+import { TopLevelMenu } from './TopLevelMenu';
+import { Flyout } from './Flyout';
 
 import styles from './MegaMenu.module.scss';
 
@@ -49,10 +49,10 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
 
-                        <MegaMenuTopLevel text="Departments" id={1} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></MegaMenuTopLevel>
-                        <MegaMenuTopLevel text="People" id={2} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></MegaMenuTopLevel>
-                        <MegaMenuTopLevel text="Projects" id={3} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></MegaMenuTopLevel>
-                        <MegaMenuTopLevel text="Help" id={4} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></MegaMenuTopLevel>
+                        <TopLevelMenu text="Departments" id={1} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></TopLevelMenu>
+                        <TopLevelMenu text="People" id={2} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></TopLevelMenu>
+                        <TopLevelMenu text="Projects" id={3} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></TopLevelMenu>
+                        <TopLevelMenu text="Help" id={4} handleFocused={this.handleFocusedTopLevelMenu} handleLostFocus={this.handleLostFocusTopLevelMenu} selectedTopLevelMenuId={this.state.selectedTopLevelMenuId}></TopLevelMenu>
 
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
@@ -61,12 +61,12 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                 </div>
 
                 {this.state.showFlyout &&
-                    <MegaMenuFlyout
+                    <Flyout
                         handleFocused={this.handleFocusedFlyout}
                         handleLostFocus={this.handleLostFocusFlyout}
                         id={this.state.selectedTopLevelMenuId}
                     >
-                    </MegaMenuFlyout>
+                    </Flyout>
                 }
 
             </div>

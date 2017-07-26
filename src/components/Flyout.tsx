@@ -1,26 +1,26 @@
 import * as React from 'react';
 
-import styles from './MegaMenuFlyout.module.scss';
+import styles from './Flyout.module.scss';
 
 import { FlyoutColumn } from './FlyoutColumn';
 
-export interface IMegaMenuFlyoutProps {
+export interface IFlyoutProps {
     id: number;
     handleFocused: (id:number) => void;
     handleLostFocus: () => void;
 }
 
-export interface IMegaMenuFlyoutState {
+export interface IFlyoutState {
 }
 
-export class MegaMenuFlyout extends React.Component<IMegaMenuFlyoutProps, IMegaMenuFlyoutState> {
+export class Flyout extends React.Component<IFlyoutProps, IFlyoutState> {
 
     constructor(props) {
         super(props);
         this.handleFocused = this.handleFocused.bind(this);
     }
 
-    public render(): React.ReactElement<IMegaMenuFlyoutProps> {
+    public render(): React.ReactElement<IFlyoutProps> {
 
         return (
             <div

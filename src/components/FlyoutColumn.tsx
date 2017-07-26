@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import styles from './FlyoutColumn.module.scss';
 import { FlyoutColumnHeading } from './FlyoutColumnHeading';
-import { FlyoutColumnLink } from './FlyoutColumnLink';
+import { MenuLink } from './MenuLink';
 
 export interface IFlyoutColumnProps {
 }
@@ -26,29 +26,29 @@ export class FlyoutColumn extends React.Component<IFlyoutColumnProps, IFlyoutCol
                     openInNewTab={false}
                 ></FlyoutColumnHeading>
 
-                <FlyoutColumnLink
+                <MenuLink
                     text="Google"
                     url="http://www.google.com.au"
                     openInNewTab={false}
-                ></FlyoutColumnLink>
+                ></MenuLink>
 
-                <FlyoutColumnLink
+                <MenuLink
                     text="Microsoft"
                     url="http://www.google.com.au"
                     openInNewTab={false}
-                ></FlyoutColumnLink>
+                ></MenuLink>
 
-                <FlyoutColumnLink
+                <MenuLink
                     text="Azure"
                     url="http://www.google.com.au"
                     openInNewTab={false}
-                ></FlyoutColumnLink>
+                ></MenuLink>
 
-                <FlyoutColumnLink
+                <MenuLink
                     text="Amazon"
                     url="http://www.google.com.au"
                     openInNewTab={false}
-                ></FlyoutColumnLink>
+                ></MenuLink>
 
             </div>
         );

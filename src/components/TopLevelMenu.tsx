@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import styles from './MegaMenuTopLevel.module.scss';
+import styles from './TopLevelMenu.module.scss';
 
-export interface IMegaMenuTopLevelProps {
+export interface ITopLevelMenuProps {
     id: number;
     text: string;
     handleFocused: (id: number) => void;
@@ -10,10 +10,10 @@ export interface IMegaMenuTopLevelProps {
     selectedTopLevelMenuId: number;
 }
 
-export interface IMegaMenuTopLevelState {
+export interface ITopLevelMenuState {
 }
 
-export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IMegaMenuTopLevelState> {
+export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelMenuState> {
 
 
     constructor(props) {
@@ -22,7 +22,7 @@ export class MegaMenuTopLevel extends React.Component<IMegaMenuTopLevelProps, IM
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
     }
 
-    public render(): React.ReactElement<IMegaMenuTopLevelProps> {
+    public render(): React.ReactElement<ITopLevelMenuProps> {
 
         return (
             <div
