@@ -92,6 +92,56 @@ $news = Add-PnPListItem -List $listNameLevel2 -Values @{"Title" = "News"; "SortO
 $events = Add-PnPListItem -List $listNameLevel2 -Values @{"Title" = "Events"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level1Item" = $newsAndEvents.Id; "Description" = $lorem} -ContentType "Item"
 
 # Level 3
-$finance = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Finance"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $corporate.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Finance"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $corporate.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Information Services"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $corporate.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "HSE"; "SortOrder" = 3; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $corporate.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Human Resources"; "SortOrder" = 4; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $corporate.Id; "Description" = $lorem} -ContentType "Item"
+
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Atomic Energy"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $rd.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Black Hole Generation"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $rd.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Time Travel"; "SortOrder" = 3; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $rd.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Weaponry"; "SortOrder" = 4; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $rd.Id; "Description" = $lorem} -ContentType "Item"
+
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Terrestrial"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Projects.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Deep Space"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Projects.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Underwater"; "SortOrder" = 3; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Projects.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Dimension X"; "SortOrder" = 4; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Projects.Id; "Description" = $lorem} -ContentType "Item"
+
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Moon Dust Extraction"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Production.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Dark Matter Mining"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Production.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Earth Core Leeching"; "SortOrder" = 3; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Production.Id; "Description" = $lorem} -ContentType "Item"
+
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Jack Jackson"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $TheBoard.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Jane Janeson"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $TheBoard.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Bob Bobson"; "SortOrder" = 3; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $TheBoard.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Michelle Michelleson"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $TheBoard.Id; "Description" = $lorem} -ContentType "Item"
+
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Michael Michaelson"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Executive.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Lee Leeson"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Executive.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Clare Clareson"; "SortOrder" = 3; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Executive.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Mathew Mathewson"; "SortOrder" = 4; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Executive.Id; "Description" = $lorem} -ContentType "Item"
+
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Google"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $SearchEngines.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Bing"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $SearchEngines.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Gargle"; "SortOrder" = 3; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $SearchEngines.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Thingo"; "SortOrder" = 4; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $SearchEngines.Id; "Description" = $lorem} -ContentType "Item"
+
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Political"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Policies.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Ethical"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Policies.Id; "Description" = $lorem} -ContentType "Item"
+
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Alien Lifeforms"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Procedures.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Rifts in Spacetime"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Procedures.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Changed the Past"; "SortOrder" = 3; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Procedures.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Earth Core Issues"; "SortOrder" = 4; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Procedures.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Lost in Space"; "SortOrder" = 5; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Procedures.Id; "Description" = $lorem} -ContentType "Item"
+
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Earth"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $News.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Mars"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $News.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Dimension X"; "SortOrder" = 3; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $News.Id; "Description" = $lorem} -ContentType "Item"
+
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Mars Family Days"; "SortOrder" = 1; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Events.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Earth"; "SortOrder" = 2; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Events.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Dimension X"; "SortOrder" = 3; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Events.Id; "Description" = $lorem} -ContentType "Item"
+$item = Add-PnPListItem -List $listNameLevel3 -Values @{"Title" = "Bottom of the Ocean"; "SortOrder" = 4; "Url" = "/"; "OpenInNewTab" = "No"; "Level2Item" = $Events.Id; "Description" = $lorem} -ContentType "Item"
 
 write-host "done." -ForegroundColor Green
