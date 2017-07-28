@@ -20,8 +20,6 @@ export default class ModernSpMegaMenuApplicationCustomizer
 
   private headerPlaceholder: Placeholder;
 
-  private readonly menuListName: string = "Mega Menu";
-
   @override
   public onInit(): Promise<void> {
     return Promise.resolve<void>();
@@ -43,7 +41,7 @@ export default class ModernSpMegaMenuApplicationCustomizer
           console.log("PageHeader placeholder is OK.")
 
 
-          MegaMenuService.getMenuItems(this.menuListName)
+          MegaMenuService.getMenuItems()
           .then((topLevelMenus: TopLevelMenu[]) => {
 
             const element: React.ReactElement<IMegaMenuProps> = React.createElement(
@@ -55,9 +53,9 @@ export default class ModernSpMegaMenuApplicationCustomizer
             ReactDom.render(element, this.headerPlaceholder.domElement);
             
           })
-          // .catch((error:any) => {
-          //   console.error(`Error trying to read menu items or rendering component : ${error.message}`);
-          // });
+          .catch((error:any) => {
+            console.error(`Error trying to read menu items or render component : ${error.message}`);
+          });
 
         } else {
           console.error('PageHeader placeholder has no DOM element.');

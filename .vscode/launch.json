@@ -9,7 +9,7 @@
             "name": "In-site debugging",
             "type": "chrome",
             "request": "launch",
-            "url": "https://lee79trial.sharepoint.com/sites/Site9/_layouts/15/viewlsts.aspx?view=14",
+            "url": "https://lee79trial.sharepoint.com/sites/Site13/_layouts/15/viewlsts.aspx?view=14",
             "webRoot": "${workspaceRoot}",
             "sourceMaps": true,
             "sourceMapPathOverrides": {

@@ -4,141 +4,131 @@ import { TopLevelMenu } from '../model/TopLevelMenu'
 import { FlyoutColumn } from '../model/FlyoutColumn'
 import { Link } from '../model/Link'
 
+import { sampleData } from './MegaMenuSampleData'
+
 export class MegaMenuService {
 
+    static readonly useSampleData: boolean = false;
+
+    static readonly level1ListName = "Mega Menu - Level 1";
+    static readonly level2ListName = "Mega Menu - Level 2";
+    static readonly level3ListName = "Mega Menu - Level 3";
+
     // Get items for the menu.
-    public static getMenuItems(megaMenuListName: string): Promise<TopLevelMenu[]> {
+    public static getMenuItems(): Promise<TopLevelMenu[]> {
+
+        if (!MegaMenuService.useSampleData) {
+
+            return new Promise<TopLevelMenu[]>((resolve, reject) => {
+
+                var level1ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level1ListName);
+                var level2ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level2ListName);
+                var level3ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level3ListName);
+
+                Promise.all([level1ItemsPromise, level2ItemsPromise, level3ItemsPromise])
+                    .then((results: any[][]) => {
+                        resolve(MegaMenuService.convertItemsFromSp(results[0], results[1], results[2]));
+                    });
+            });
+        }
+        else {
+            return new Promise<TopLevelMenu[]>((resolve, reject) => {
+                resolve(sampleData);
+            });
+        }
+
+    }
+
+    // Get raw results from SP.
+    private static getMenuItemsFromSp(listName: string): Promise<any[]> {
 
         return new Promise<TopLevelMenu[]>((resolve, reject) => {
-            resolve(MegaMenuService.getSampleData());
+            pnp.sp.site.rootWeb.lists
+                .getByTitle(listName)
+                .items
+                .orderBy("SortOrder")
+                .get()
+                .then((items: any[]) => {
+                    resolve(items);
+                })
+                .catch((error: any) => {
+                    reject(error);
+                });
         });
 
     }
 
-    private static getSampleData(): TopLevelMenu[] {
-        return [
-            {
-                id: 1,
-                text: "Organisation",
-                columns: [
-                    {
-                        heading: { text: "Corporate", url:"/", openInNewTab:false },
-                        links: [
-                            { text: "Finance", url: "/", openInNewTab: false },
-                            { text: "Information Services", url: "/", openInNewTab: false },
-                            { text: "HSE", url: "/", openInNewTab: false },
-                            { text: "Human Resources", url: "/", openInNewTab: false }
-                        ]
-                    },
-                    {
-                        heading: { text: "R & D" },
-                        links: [
-                            { text: "Atomic Energy", url: "/", openInNewTab: false },
-                            { text: "Black Hole Generation", url: "/", openInNewTab: false },
-                            { text: "Time Travel", url: "/", openInNewTab: false },
-                            { text: "Weaponry", url: "/", openInNewTab: false }
-                        ]
-                    },
-                    {
-                        heading: { text: "Projects" },
-                        links: [
-                            { text: "Terrestrial", url: "/", openInNewTab: false },
-                            { text: "Deep Space", url: "/", openInNewTab: false },
-                            { text: "Underwater", url: "/", openInNewTab: false },
-                            { text: "Dimension X", url: "/", openInNewTab: false }
-                        ]
-                    },
-                    {
-                        heading: { text: "Production" },
-                        links: [
-                            { text: "Moon Dust Extraction", url: "/", openInNewTab: false },
-                            { text: "Dark Matter Mining", url: "/", openInNewTab: false },
-                            { text: "Earth Core Leeching", url: "/", openInNewTab: false }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: 2,
-                text: "The Management Team",
-                columns: [
-                    {
-                        heading: { text: "The Board" },
-                        links: [
-                            { text: "Jack Jackson", url: "/", openInNewTab: false },
-                            { text: "Jane Janeson", url: "/", openInNewTab: false },
-                            { text: "Bob Bobson", url: "/", openInNewTab: false },
-                            { text: "Michelle Michelleson", url: "/", openInNewTab: false }
-                        ]
-                    },
-                    {
-                        heading: { text: "Executive" },
-                        links: [
-                            { text: "Michael Michaelson", url: "/", openInNewTab: false },
-                            { text: "Lee Leeson", url: "/", openInNewTab: false },
-                            { text: "Clare Clareson", url: "/", openInNewTab: false },
-                            { text: "Mathew Mathewson", url: "/", openInNewTab: false }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: 3,
-                text: "Resources",
-                columns: [
-                    {
-                        heading: { text: "Search Engines" },
-                        links: [
-                            { text: "Google", url: "/", openInNewTab: false },
-                            { text: "Bing", url: "/", openInNewTab: false },
-                            { text: "Gargle", url: "/", openInNewTab: false },
-                            { text: "Thingo", url: "/", openInNewTab: false }
-                        ]
-                    },
-                    {
-                        heading: { text: "Policies" },
-                        links: [
-                            { text: "Political", url: "/", openInNewTab: false },
-                            { text: "Ethical", url: "/", openInNewTab: false }
-                        ]
-                    },
-                    {
-                        heading: { text: "Procedures" },
-                        links: [
-                            { text: "Alien Lifeforms", url: "/", openInNewTab: false },
-                            { text: "Rifts in Spacetime", url: "/", openInNewTab: false },
-                            { text: "Changed the Past", url: "/", openInNewTab: false },
-                            { text: "Earth Core Issues", url: "/", openInNewTab: false },
-                            { text: "Lost in Space", url: "/", openInNewTab: false },
-                        ]
-                    },
-                ]
-            },
-            {
-                id: 4,
-                text: "News and Events",
-                columns: [
-                    {
-                        heading: { text: "News" },
-                        links: [
-                            { text: "Earth", url: "/", openInNewTab: false },
-                            { text: "Mars", url: "/", openInNewTab: false },
-                            { text: "Dimension X", url: "/", openInNewTab: false }
-                        ]
-                    },
-                    {
-                        heading: { text: "Events" },
-                        links: [
-                            { text: "Mars Family Days", url: "/", openInNewTab: false },
-                            { text: "Earth", url: "/", openInNewTab: false },
-                            { text: "Dimension X", url: "/", openInNewTab: false },
-                            { text: "Bottom of the Ocean", url: "/", openInNewTab: false }
-                        ]
-                    }
-                ]
-            }
-        ];
+
+    // Convert results from SP into actual entities with correct relationships.
+    private static convertItemsFromSp(level1: any[], level2: any[], level3: any[]): TopLevelMenu[] {
+
+        var level1Dictionary: { [id: number]: TopLevelMenu; } = {};
+        var level2Dictionary: { [id: number]: FlyoutColumn; } = {};
+
+        // Convert level 1 items and store in dictionary.
+        var level1Items: TopLevelMenu[] = level1.map((item: any) => {
+            var newItem = {
+                id: item.Id,
+                text: item.Title,
+                columns: []
+            };
+
+            level1Dictionary[newItem.id] = newItem;
+
+            return newItem;
+        });
+
+        // Convert level 2 items and store in dictionary.
+        var level2Items: FlyoutColumn[] = level2.map((item: any) => {
+            var newItem = {
+                id: item.Id,
+                heading: {
+                    text:item.Title,
+                    url:item.Url.Url,
+                    openInNewTab:item.OpenInNewTab
+                },
+                links: [],
+                level1ParentId: item.Level1ItemId
+            };
+
+            level2Dictionary[newItem.id] = newItem;
+
+            return newItem;
+        });
+
+        // Convert level 3 items and store in dictionary.
+        var level3Items: Link[] = level3.map((item: any) => {
+            return {
+                level2ParentId: item.Level2ItemId,
+                text: item.Title,
+                url: item.Url.Url,
+                openInNewTab: item.OpenInNewTab
+            };
+        });
+
+        console.log(level1Dictionary);
+
+        // Now link the entities into the desired structure.
+        for(let l3 of level3Items){
+            level2Dictionary[l3.level2ParentId].links.push(l3);
+        }
+
+        for(let l2 of level2Items){
+            level1Dictionary[l2.level1ParentId].columns.push(l2);
+        }
+
+        var retVal:TopLevelMenu[] = [];
+
+        for(let l1 of level1Items){
+            retVal.push(l1);
+        }
+
+        return retVal;
 
     }
+
+
+
+
 
 }

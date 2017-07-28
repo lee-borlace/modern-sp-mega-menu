@@ -4,5 +4,5 @@ import { FlyoutColumn } from './FlyoutColumn';
 export class TopLevelMenu {
     public id: number;
     public text: string;
-    public columns: FlyoutColumn[];
+    public columns?: FlyoutColumn[];
 }
