@@ -1,7 +1,10 @@
-.container {
-   
+@import 'Common';
 
-    @media screen {
+.container {
+    
+    cursor: pointer;
+
+    @include desktop {
         padding-top: 30px;
         padding-bottom: 30px;
         position:fixed;
