@@ -8,7 +8,9 @@ import { FlyoutColumn as FlyoutColumnModel } from '../model/FlyoutColumn';
 import { Link as LinkModel } from '../model/Link';
 
 export interface IFlyoutColumnHeadingProps {
-    item:LinkModel;
+    item: LinkModel;
+    mobileMode: boolean;
+    headingTouched: () => void;
 }
 
 export interface IFlyoutColumnHeadingState {
@@ -22,28 +24,34 @@ export class FlyoutColumnHeading extends React.Component<IFlyoutColumnHeadingPro
 
     public render(): React.ReactElement<IFlyoutColumnHeadingProps> {
 
-        // Heading has a link.
-        if (this.props.item.url) {
+        // Heading has a link, and we're not in mobile mode.
+        if (this.props.item.url && !this.props.mobileMode) {
             return (
                 <Link
                     className={`${styles.headingLink} ms-fontWeight-semibold ms-fontSize-m-plus`}
                     href={this.props.item.url}
                     target={this.props.item.openInNewTab ? "_blank" : ""}
+                    onTouchStart={this.props.headingTouched}
                 >
                     {this.props.item.text}
                 </Link>
             );
         }
-        // Heading is just text.
+        // Heading is just text, or we're in mobile mode. In mobile mode we render as just a heading so it can be clicked to expand
+        // and view level 3 items instead of navigating to item. TODO : better approach which allows link to be navigated
+        // and also to expand the sub-items.
         else {
             return (
                 <div
                     className={`${styles.headingNoLink} ms-fontWeight-semibold ms-fontSize-l`}
+                    onTouchStart={this.props.headingTouched}
                 >
                     {this.props.item.text}
                 </div>
             );
         }
-      
+
     }
+
+  
 }

@@ -79,7 +79,9 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                 {(!mobileMode || (mobileMode && this.state.showTopLevelMenuItemsWhenMobile)) && (
                     <div className={
                         `ms-Grid 
-                    ms-bgColor-themeSecondary 
+                         ms-bgColor-themeSecondary 
+                         ms-slideDownIn10
+                         ${mobileMode ? "ms-slideDownIn10" : ""}
                     `}>
                         <div className="ms-Grid-row">
 
@@ -177,12 +179,17 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
 
     handleMobileMenuTouched() {
         this.setState((prevState, props) => {
+            
+            var showTopLevelMenuItemsWhenMobile = !prevState.showTopLevelMenuItemsWhenMobile;
+            
+            var showFlyout = prevState.showFlyout && showTopLevelMenuItemsWhenMobile;
+
             return {
-                showFlyout: prevState.showFlyout,
+                showFlyout: showFlyout,
                 cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
                 cursorInFlyout: prevState.cursorInFlyout,
                 selectedTopLevelItem: prevState.selectedTopLevelItem,
-                showTopLevelMenuItemsWhenMobile: !prevState.showTopLevelMenuItemsWhenMobile,
+                showTopLevelMenuItemsWhenMobile: showTopLevelMenuItemsWhenMobile
             }
         });
     }
