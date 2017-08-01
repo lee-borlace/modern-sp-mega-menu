@@ -12,9 +12,6 @@ $listNameLevel3 = "Mega Menu - Level 3"
 function Create-LinksList {
     
     Param ($listName)
-
-    # TODO - remove this!!!
-    Remove-PnPList -Identity $listName -Force
     
     write-host "Creating list $listName..." -NoNewline -ForegroundColor Gray
 
