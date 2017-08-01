@@ -43,20 +43,19 @@ export class FlyoutColumn extends React.Component<IFlyoutColumnProps, IFlyoutCol
         const links = !mobileMode || (mobileMode && this.state.showLinksWhenMobile) ? this.props.links.map((item: LinkModel) =>
             <MenuLink
                 item={item}
+                mobileMode={mobileMode}
             >
             </MenuLink>
         ) : null;
 
         return (
-            <div className={`ms-Grid-col ms-lg2 ms-sm12 ms-fontColor-neutralPrimary ${mobileMode ? "ms-slideDownIn10" : ""}`}>
+            <div className={`ms-Grid-col ms-lg2 ms-sm12 ms-fontColor-neutralPrimary ${mobileMode ? "ms-slideDownIn10 ms-textAlignCenter" : ""}`}>
                 <FlyoutColumnHeading
                     item={this.props.header}
                     mobileMode={mobileMode}
                     headingTouched={this.handleHeadingTouched}
                 ></FlyoutColumnHeading>
-
                 {links}
-
             </div>
         );
     }

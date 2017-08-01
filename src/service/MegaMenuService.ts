@@ -106,8 +106,6 @@ export class MegaMenuService {
             };
         });
 
-        console.log(level1Dictionary);
-
         // Now link the entities into the desired structure.
         for(let l3 of level3Items){
             level2Dictionary[l3.level2ParentId].links.push(l3);

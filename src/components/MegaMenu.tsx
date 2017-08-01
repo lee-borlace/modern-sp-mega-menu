@@ -62,6 +62,7 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                 key={item.id.toString()}
                 topLevelMenu={item}
                 handleFocused={this.handleFocusedTopLevelMenu}
+                handleTouched={this.handleFocusedTopLevelMenu}
                 handleLostFocus={this.handleLostFocusTopLevelMenu}
                 selectedTopLevelMenuId={this.state.selectedTopLevelItem ? this.state.selectedTopLevelItem.id : 0}>
             </TopLevelMenu>
@@ -111,6 +112,7 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
             </div>
         );
     }
+
 
 
     handleFocusedTopLevelMenu(selectedTopLevelItem: TopLevelMenuModel) {
@@ -179,9 +181,9 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
 
     handleMobileMenuTouched() {
         this.setState((prevState, props) => {
-            
+
             var showTopLevelMenuItemsWhenMobile = !prevState.showTopLevelMenuItemsWhenMobile;
-            
+
             var showFlyout = prevState.showFlyout && showTopLevelMenuItemsWhenMobile;
 
             return {

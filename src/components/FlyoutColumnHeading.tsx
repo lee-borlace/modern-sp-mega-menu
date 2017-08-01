@@ -28,7 +28,7 @@ export class FlyoutColumnHeading extends React.Component<IFlyoutColumnHeadingPro
         if (this.props.item.url && !this.props.mobileMode) {
             return (
                 <Link
-                    className={`${styles.headingLink} ms-fontWeight-semibold ms-fontSize-m-plus`}
+                    className={`${styles.headingLink} ${!this.props.mobileMode ? "ms-fontWeight-semibold" : ""} ms-fontSize-m-plus`}
                     href={this.props.item.url}
                     target={this.props.item.openInNewTab ? "_blank" : ""}
                     onTouchStart={this.props.headingTouched}
@@ -43,7 +43,7 @@ export class FlyoutColumnHeading extends React.Component<IFlyoutColumnHeadingPro
         else {
             return (
                 <div
-                    className={`${styles.headingNoLink} ms-fontWeight-semibold ms-fontSize-l`}
+                    className={`${styles.headingNoLink} ${!this.props.mobileMode ? "ms-fontWeight-semibold" : ""} ms-fontSize-m-plus`}
                     onTouchStart={this.props.headingTouched}
                 >
                     {this.props.item.text}
@@ -53,5 +53,5 @@ export class FlyoutColumnHeading extends React.Component<IFlyoutColumnHeadingPro
 
     }
 
-  
+
 }

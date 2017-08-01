@@ -9,6 +9,7 @@ import { Link as LinkModel } from '../model/Link';
 export interface ITopLevelMenuProps {
     topLevelMenu: TopLevelMenuModel;
     handleFocused: (topLevelMenu: TopLevelMenuModel) => void;
+    handleTouched: (topLevelMenu: TopLevelMenuModel) => void;
     handleLostFocus: () => void;
     selectedTopLevelMenuId: number;
 }
@@ -23,6 +24,7 @@ export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelM
         super(props);
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
+        this.handleTouched = this.handleTouched.bind(this);
     }
 
     public render(): React.ReactElement<ITopLevelMenuProps> {
@@ -42,7 +44,7 @@ export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelM
 
                 onMouseEnter={this.handleMouseEnter}
                 onClick={this.handleMouseEnter}
-                onTouchStart={this.handleMouseEnter}
+                onTouchStart={this.handleTouched}
                 onMouseLeave={this.props.handleLostFocus}
             >
                 {this.props.topLevelMenu.text}
@@ -52,6 +54,10 @@ export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelM
 
     handleMouseEnter() {
         this.props.handleFocused(this.props.topLevelMenu);
+    }
+
+    handleTouched() {
+        this.props.handleTouched(this.props.topLevelMenu);
     }
 
 }

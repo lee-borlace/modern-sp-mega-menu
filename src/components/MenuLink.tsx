@@ -9,6 +9,7 @@ import { Link as LinkModel } from '../model/Link';
 
 export interface IMenuLinkProps {
     item:LinkModel;
+    mobileMode: boolean;
 }
 
 export interface IMenuLinkState {
@@ -24,7 +25,7 @@ export class MenuLink extends React.Component<IMenuLinkProps, IMenuLinkState> {
 
        return (
             <Link  
-                className={`${styles.link} ms-fontColor-neutralPrimary ms-fontSize-m`}
+                className={`${styles.link} ${!this.props.mobileMode ? "ms-fontColor-neutralPrimary" : "ms-fontColor-neutralSecondary"} ms-fontSize-m`}
                 href={this.props.item.url}
                 target={this.props.item.openInNewTab ? "_blank" : ""}
             >
