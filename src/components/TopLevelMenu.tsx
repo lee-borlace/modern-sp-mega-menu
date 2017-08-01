@@ -31,12 +31,12 @@ export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelM
             <div
                 className={`
                 ms-Grid-col 
-                ${this.props.selectedTopLevelMenuId == this.props.topLevelMenu.id ? "ms-bgColor-themeSecondary" : "ms-bgColor-themePrimary"}
+                ${this.props.selectedTopLevelMenuId == this.props.topLevelMenu.id ? "ms-bgColor-themeLighterAlt" : "ms-bgColor-themeSecondary"}
                 ms-lg2 
                 ms-sm12 
                 ms-textAlignCenter
                 ms-fontSize-l
-                 ms-fontColor-themeLighterAlt
+                ${this.props.selectedTopLevelMenuId == this.props.topLevelMenu.id ? "ms-fontColor-neutralPrimary" : "ms-fontColor-neutralPrimaryAlt"}
                 ${styles.container}
                 `}
 

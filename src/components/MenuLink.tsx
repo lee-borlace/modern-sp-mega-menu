@@ -24,7 +24,7 @@ export class MenuLink extends React.Component<IMenuLinkProps, IMenuLinkState> {
 
        return (
             <Link  
-                className={`${styles.link} ms-fontColor-neutralPrimary ms-fontSize-mp`}
+                className={`${styles.link} ms-fontColor-neutralPrimary ms-fontSize-m`}
                 href={this.props.item.url}
                 target={this.props.item.openInNewTab ? "_blank" : ""}
             >

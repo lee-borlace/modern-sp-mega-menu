@@ -26,7 +26,7 @@ export class FlyoutColumnHeading extends React.Component<IFlyoutColumnHeadingPro
         if (this.props.item.url) {
             return (
                 <Link
-                    className={`${styles.headingLink} ms-fontWeight-semibold ms-fontSize-l`}
+                    className={`${styles.headingLink} ms-fontWeight-semibold ms-fontSize-m-plus`}
                     href={this.props.item.url}
                     target={this.props.item.openInNewTab ? "_blank" : ""}
                 >

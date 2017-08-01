@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Layer, LayerHost } from 'office-ui-fabric-react/lib/Layer';
+import { withResponsiveMode, ResponsiveMode } from 'office-ui-fabric-react/lib/utilities/decorators/withResponsiveMode';
 
 import { TopLevelMenu } from './TopLevelMenu';
 import { Flyout } from './Flyout';
+import { MobileMenu } from './MobileMenu';
 
 import styles from './MegaMenu.module.scss';
 
@@ -11,7 +13,8 @@ import { FlyoutColumn as FlyoutColumnModel } from '../model/FlyoutColumn';
 import { Link as LinkModel } from '../model/Link';
 
 export interface IMegaMenuProps {
-    topLevelMenuItems:TopLevelMenuModel[];
+    topLevelMenuItems: TopLevelMenuModel[];
+    responsiveMode?: ResponsiveMode;
 }
 
 export interface IMegaMenuState {
@@ -19,18 +22,21 @@ export interface IMegaMenuState {
     cursorInTopLevelMenu: boolean;
     cursorInFlyout: boolean;
     selectedTopLevelItem: TopLevelMenuModel;
+    showTopLevelMenuItemsWhenMobile: boolean; //For mobile mode only, this determines whether or not to show top level menu items.
 }
 
+@withResponsiveMode
 export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
 
     constructor(props) {
         super(props);
 
-        this.state = { 
-            showFlyout: false, 
-            cursorInTopLevelMenu: false, 
-            cursorInFlyout: false, 
+        this.state = {
+            showFlyout: false,
+            cursorInTopLevelMenu: false,
+            cursorInFlyout: false,
             selectedTopLevelItem: null,
+            showTopLevelMenuItemsWhenMobile: false
         };
 
         // These are needed to ensure "this" resolves in the functions.
@@ -38,38 +44,58 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
         this.handleLostFocusTopLevelMenu = this.handleLostFocusTopLevelMenu.bind(this);
         this.handleFocusedFlyout = this.handleFocusedFlyout.bind(this);
         this.handleLostFocusFlyout = this.handleLostFocusFlyout.bind(this);
+        this.handleMobileMenuTouched = this.handleMobileMenuTouched.bind(this);
     }
 
 
     public render(): React.ReactElement<IMegaMenuProps> {
 
-        const topLevelItems = this.props.topLevelMenuItems.map((item:TopLevelMenuModel) => 
-            <TopLevelMenu 
+        var responsiveMode = this.props.responsiveMode;
+        if (responsiveMode === undefined) {
+            responsiveMode = ResponsiveMode.large;
+        }
+
+        var mobileMode = responsiveMode < ResponsiveMode.large;
+
+        const topLevelItems = this.props.topLevelMenuItems.map((item: TopLevelMenuModel) =>
+            <TopLevelMenu
                 key={item.id.toString()}
                 topLevelMenu={item}
-                handleFocused={this.handleFocusedTopLevelMenu} 
-                handleLostFocus={this.handleLostFocusTopLevelMenu} 
+                handleFocused={this.handleFocusedTopLevelMenu}
+                handleLostFocus={this.handleLostFocusTopLevelMenu}
                 selectedTopLevelMenuId={this.state.selectedTopLevelItem ? this.state.selectedTopLevelItem.id : 0}>
             </TopLevelMenu>
         );
 
         return (
             <div>
-                <div className={
-                    `ms-Grid 
-                    ms-bgColor-themePrimary`}>
-                    <div className="ms-Grid-row">
-                        
-                        <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
-                        </div>
 
-                        {topLevelItems}
-                     
-                        <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
-                        </div>
+                {mobileMode && (
+                    <MobileMenu
+                        handleTouched={this.handleMobileMenuTouched}
+                    ></MobileMenu>
+                )}
 
+                {(!mobileMode || (mobileMode && this.state.showTopLevelMenuItemsWhenMobile)) && (
+                    <div className={
+                        `ms-Grid 
+                    ms-bgColor-themeSecondary 
+                    `}>
+                        <div className="ms-Grid-row">
+
+                            {/* Spacer - hide for smaller layouts */}
+                            <div className="ms-Grid-col ms-lg2">
+                            </div>
+
+                            {topLevelItems}
+
+                            {/* Spacer - hide for smaller layouts */}
+                            <div className="ms-Grid-col ms-lg2">
+                            </div>
+
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {this.state.showFlyout &&
                     <Flyout
@@ -85,12 +111,13 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
     }
 
 
-    handleFocusedTopLevelMenu(selectedTopLevelItem:TopLevelMenuModel) {
+    handleFocusedTopLevelMenu(selectedTopLevelItem: TopLevelMenuModel) {
         this.setState((prevState, props) => ({
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: true,
             cursorInFlyout: prevState.cursorInFlyout,
-            selectedTopLevelItem: selectedTopLevelItem
+            selectedTopLevelItem: selectedTopLevelItem,
+            showTopLevelMenuItemsWhenMobile: prevState.showTopLevelMenuItemsWhenMobile,
         }));
 
         this.checkFlyoutVisibility();
@@ -101,18 +128,20 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: false,
             cursorInFlyout: prevState.cursorInFlyout,
-            selectedTopLevelItem: prevState.selectedTopLevelItem
+            selectedTopLevelItem: prevState.selectedTopLevelItem,
+            showTopLevelMenuItemsWhenMobile: prevState.showTopLevelMenuItemsWhenMobile,
         }));
 
         this.checkFlyoutVisibility();
     }
 
-    handleFocusedFlyout(selectedTopLevelItem:TopLevelMenuModel) {
+    handleFocusedFlyout(selectedTopLevelItem: TopLevelMenuModel) {
         this.setState((prevState, props) => ({
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
             cursorInFlyout: true,
-            selectedTopLevelItem: selectedTopLevelItem
+            selectedTopLevelItem: selectedTopLevelItem,
+            showTopLevelMenuItemsWhenMobile: prevState.showTopLevelMenuItemsWhenMobile,
         }));
 
         this.checkFlyoutVisibility();
@@ -123,7 +152,8 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
             cursorInFlyout: false,
-            selectedTopLevelItem: prevState.selectedTopLevelItem
+            selectedTopLevelItem: prevState.selectedTopLevelItem,
+            showTopLevelMenuItemsWhenMobile: prevState.showTopLevelMenuItemsWhenMobile,
         }));
 
         this.checkFlyoutVisibility();
@@ -133,14 +163,28 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
     checkFlyoutVisibility() {
         this.setState((prevState, props) => {
 
-            var showFlyout = prevState.cursorInTopLevelMenu || prevState.cursorInFlyout; 
+            var showFlyout = prevState.cursorInTopLevelMenu || prevState.cursorInFlyout;
 
             return {
                 showFlyout: showFlyout,
                 cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
                 cursorInFlyout: prevState.cursorInFlyout,
-                selectedTopLevelItem: showFlyout ? prevState.selectedTopLevelItem : null
-        }});
+                selectedTopLevelItem: showFlyout ? prevState.selectedTopLevelItem : null,
+                showTopLevelMenuItemsWhenMobile: prevState.showTopLevelMenuItemsWhenMobile,
+            }
+        });
+    }
+
+    handleMobileMenuTouched() {
+        this.setState((prevState, props) => {
+            return {
+                showFlyout: prevState.showFlyout,
+                cursorInTopLevelMenu: prevState.cursorInTopLevelMenu,
+                cursorInFlyout: prevState.cursorInFlyout,
+                selectedTopLevelItem: prevState.selectedTopLevelItem,
+                showTopLevelMenuItemsWhenMobile: !prevState.showTopLevelMenuItemsWhenMobile,
+            }
+        });
     }
 
 
