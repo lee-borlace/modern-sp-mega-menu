@@ -41,21 +41,21 @@ export default class ModernSpMegaMenuApplicationCustomizer
           console.log("PageHeader placeholder is OK.")
 
 
-          MegaMenuService.getMenuItems()
-          .then((topLevelMenus: TopLevelMenu[]) => {
+          MegaMenuService.getMenuItems(this.context.pageContext.site.absoluteUrl)
+            .then((topLevelMenus: TopLevelMenu[]) => {
 
-            const element: React.ReactElement<IMegaMenuProps> = React.createElement(
-              MegaMenu,
-              {
-                topLevelMenuItems : topLevelMenus
-              });
+              const element: React.ReactElement<IMegaMenuProps> = React.createElement(
+                MegaMenu,
+                {
+                  topLevelMenuItems: topLevelMenus
+                });
 
-            ReactDom.render(element, this.headerPlaceholder.domElement);
-            
-          })
-          .catch((error:any) => {
-            console.error(`Error trying to read menu items or render component : ${error.message}`);
-          });
+              ReactDom.render(element, this.headerPlaceholder.domElement);
+
+            })
+            .catch((error: any) => {
+              console.error(`Error trying to read menu items or render component : ${error.message}`);
+            });
 
         } else {
           console.error('PageHeader placeholder has no DOM element.');

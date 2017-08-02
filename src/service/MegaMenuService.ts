@@ -1,4 +1,5 @@
 import pnp from 'sp-pnp-js';
+import { Web }  from 'sp-pnp-js/lib/sharepoint/webs';
 
 import { TopLevelMenu } from '../model/TopLevelMenu'
 import { FlyoutColumn } from '../model/FlyoutColumn'
@@ -17,7 +18,7 @@ export class MegaMenuService {
     static readonly cacheKey: string = "MegaMenuTopLevelItems";
 
     // Get items for the menu and cache the result in session cache.
-    public static getMenuItems(): Promise<TopLevelMenu[]> {
+    public static getMenuItems(siteCollectionUrl:string): Promise<TopLevelMenu[]> {
 
         if (!MegaMenuService.useSampleData) {
 
@@ -34,9 +35,9 @@ export class MegaMenuService {
 
                     console.log("Didn't find mega menu items in cache, getting from list.");
 
-                    var level1ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level1ListName);
-                    var level2ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level2ListName);
-                    var level3ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level3ListName);
+                    var level1ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level1ListName, siteCollectionUrl);
+                    var level2ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level2ListName, siteCollectionUrl);
+                    var level3ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level3ListName, siteCollectionUrl);
 
                     Promise.all([level1ItemsPromise, level2ItemsPromise, level3ItemsPromise])
                         .then((results: any[][]) => {
@@ -60,10 +61,16 @@ export class MegaMenuService {
     }
 
     // Get raw results from SP.
-    private static getMenuItemsFromSp(listName: string): Promise<any[]> {
+    private static getMenuItemsFromSp(listName: string, siteCollectionUrl:string): Promise<any[]> {
 
         return new Promise<TopLevelMenu[]>((resolve, reject) => {
-            pnp.sp.site.rootWeb.lists
+            
+            let web = new Web(siteCollectionUrl);
+            
+            // TODO : Note that passing in url and using this approach is a workaround. I would have liked to just
+            // call pnp.sp.site.rootWeb.lists, however when running this code on SPO modern pages, the REST call ended
+            // up with a corrupt URL. However it was OK on View All Site content pages, etc.
+            web.lists
                 .getByTitle(listName)
                 .items
                 .orderBy("SortOrder")
