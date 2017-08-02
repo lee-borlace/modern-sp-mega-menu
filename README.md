@@ -15,6 +15,8 @@ Usage :
 .\create-lists.ps1 -siteCollectionUrl <site collection root URL>
 ```
 
+Now add app *Mega Menu for Modern SP* to sites as desired.
+
 ## Packaging and running locally
 
 1. `gulp bundle`
@@ -31,8 +33,10 @@ Usage :
 
 ## Some limitations
 - At this pre-release point, SPFX extensions seem to be intermittent in their ability to find particular page placeholders. If it is consistently failing to find the header placeholder (see console), try hard refreshing the page in the browser, or opening the same page in a new tab.
-- The components use the Fabric UI theme classes e.g. `ms-bgColor-themePrimary`. These seem to behave inconsistently on my tenant - they will sometimes use my configured theme, but sometimes will default to the grey theme. Your results may vary.
+- The components use the Fabric UI theme classes e.g. `ms-bgColor-themePrimary`. These seem to behave differently depending on which page you're on - for actual modern content pages, they use the configured theme, but for system pages e.g. View All Site Content they use a grey theme.
 - Due to current SPFX limitations, you must install the app to any sites you want it to take effect on. Hopefully in future it will be possible to deploy once to an entire site collection.
-- I'm not a UX person or a designer - I haven't maximised the pretiness quotient in this sample.
+- This solution only applies to **modern** pages in SPO. To apply to classic pages too, you would need a parallel solution to inject the
+same code the old-fashioned way e.g. custom action.
+- I'm not a UX person or a designer - I haven't maximised the pretiness quotient in this sample. The mobile view of the menu gives the idea, but isn't the work of Leonardo Da Vinci.
 
 ## How it works
