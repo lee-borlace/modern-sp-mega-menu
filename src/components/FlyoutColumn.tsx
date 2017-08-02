@@ -13,6 +13,7 @@ export interface IFlyoutColumnProps {
     header: LinkModel;
     links: LinkModel[];
     responsiveMode?: ResponsiveMode;
+    widthPercent: number;
 }
 
 export interface IFlyoutColumnState {
@@ -49,7 +50,12 @@ export class FlyoutColumn extends React.Component<IFlyoutColumnProps, IFlyoutCol
         ) : null;
 
         return (
-            <div className={`ms-Grid-col ms-lg2 ms-sm12 ms-fontColor-neutralPrimary ${mobileMode ? "ms-slideDownIn10 ms-textAlignCenter" : ""}`}>
+            <div
+                className={`ms-Grid-col ms-sm12 ms-fontColor-neutralPrimary ${mobileMode ? "ms-slideDownIn10 ms-textAlignCenter" : ""}`}
+                style={!mobileMode ? {
+                    width: this.props.widthPercent + "%"
+                } : {}}
+            >
                 <FlyoutColumnHeading
                     item={this.props.header}
                     mobileMode={mobileMode}

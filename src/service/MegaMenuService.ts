@@ -104,7 +104,7 @@ export class MegaMenuService {
                 id: item.Id,
                 heading: {
                     text: item.Title,
-                    url: item.Url.Url,
+                    url: item.Url ? item.Url.Url : "",
                     openInNewTab: item.OpenInNewTab
                 },
                 links: [],

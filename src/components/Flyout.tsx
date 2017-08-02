@@ -10,9 +10,8 @@ import { Link as LinkModel } from '../model/Link';
 
 export interface IFlyoutProps {
     topLevelItem: TopLevelMenuModel;
-    handleFocused: (topLevelItem:TopLevelMenuModel) => void;
+    handleFocused: (topLevelItem: TopLevelMenuModel) => void;
     handleLostFocus: () => void;
-
 }
 
 export interface IFlyoutState {
@@ -27,11 +26,14 @@ export class Flyout extends React.Component<IFlyoutProps, IFlyoutState> {
 
     public render(): React.ReactElement<IFlyoutProps> {
 
-         const columns = this.props.topLevelItem.columns.map((column:FlyoutColumnModel) => 
+        // Max width to be divided up is 66%, because we have a spacer column on each end of the set of columns,
+        // each taking up 2/12 of the width (i.e. 4/12 total = a third of the page).
+        const columns = this.props.topLevelItem.columns.map((column: FlyoutColumnModel) =>
             <FlyoutColumn
                 header={column.heading}
                 links={column.links}
-            >
+                widthPercent={66 / this.props.topLevelItem.columns.length}>
+                >
             </FlyoutColumn>
         );
 
@@ -53,13 +55,14 @@ export class Flyout extends React.Component<IFlyoutProps, IFlyoutState> {
 
                         <div className="ms-Grid-col ms-lg2 ms-hiddenSm">
                         </div>
+
                     </div>
                 </div>
             </div>
         );
     }
 
-     handleFocused() {
+    handleFocused() {
         this.props.handleFocused(this.props.topLevelItem);
     }
 
