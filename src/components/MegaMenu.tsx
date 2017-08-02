@@ -64,7 +64,8 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                 handleFocused={this.handleFocusedTopLevelMenu}
                 handleTouched={this.handleFocusedTopLevelMenu}
                 handleLostFocus={this.handleLostFocusTopLevelMenu}
-                selectedTopLevelMenuId={this.state.selectedTopLevelItem ? this.state.selectedTopLevelItem.id : 0}>
+                selectedTopLevelMenuId={this.state.selectedTopLevelItem ? this.state.selectedTopLevelItem.id : 0}
+                widthPercent={100 / this.props.topLevelMenuItems.length}>
             </TopLevelMenu>
         );
 
@@ -86,15 +87,7 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
                     `}>
                         <div className="ms-Grid-row">
 
-                            {/* Spacer - hide for smaller layouts */}
-                            <div className="ms-Grid-col ms-lg2">
-                            </div>
-
                             {topLevelItems}
-
-                            {/* Spacer - hide for smaller layouts */}
-                            <div className="ms-Grid-col ms-lg2">
-                            </div>
 
                         </div>
                     </div>

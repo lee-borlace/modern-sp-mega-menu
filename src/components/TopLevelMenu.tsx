@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { withResponsiveMode, ResponsiveMode } from 'office-ui-fabric-react/lib/utilities/decorators/withResponsiveMode';
 
 import styles from './TopLevelMenu.module.scss';
 
@@ -12,11 +13,14 @@ export interface ITopLevelMenuProps {
     handleTouched: (topLevelMenu: TopLevelMenuModel) => void;
     handleLostFocus: () => void;
     selectedTopLevelMenuId: number;
+    responsiveMode?: ResponsiveMode;
+    widthPercent: number;
 }
 
 export interface ITopLevelMenuState {
 }
 
+@withResponsiveMode
 export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelMenuState> {
 
 
@@ -29,18 +33,27 @@ export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelM
 
     public render(): React.ReactElement<ITopLevelMenuProps> {
 
+        var responsiveMode = this.props.responsiveMode;
+        if (responsiveMode === undefined) {
+            responsiveMode = ResponsiveMode.large;
+        }
+        var mobileMode = responsiveMode < ResponsiveMode.large;
+
         return (
             <div
                 className={`
-                ms-Grid-col 
+                ms-Grid-col
                 ${this.props.selectedTopLevelMenuId == this.props.topLevelMenu.id ? "ms-bgColor-themeLighterAlt" : "ms-bgColor-themeSecondary"}
-                ms-lg2 
-                ms-sm12 
+                ${mobileMode ? "ms-sm12" : ""}
                 ms-textAlignCenter
                 ms-fontSize-l
                 ${this.props.selectedTopLevelMenuId == this.props.topLevelMenu.id ? "ms-fontColor-neutralPrimary" : "ms-fontColor-neutralPrimaryAlt"}
                 ${styles.container}
                 `}
+
+                style={!mobileMode ? {
+                    width: this.props.widthPercent + "%"
+                } : {}}
 
                 onMouseEnter={this.handleMouseEnter}
                 onClick={this.handleMouseEnter}
