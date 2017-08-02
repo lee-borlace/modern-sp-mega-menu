@@ -1,13 +1,16 @@
 import * as React from 'react';
 import styles from './MobileMenu.module.scss';
+import { withResponsiveMode, ResponsiveMode } from 'office-ui-fabric-react/lib/utilities/decorators/withResponsiveMode';
 
 export interface IMobileMenuProps {
     handleTouched: () => void;
+    responsiveMode?: ResponsiveMode;
 }
 
 export interface IMobileMenuState {
 }
 
+@withResponsiveMode
 export class MobileMenu extends React.Component<IMobileMenuProps, IMobileMenuState> {
 
     constructor(props) {
@@ -19,7 +22,8 @@ export class MobileMenu extends React.Component<IMobileMenuProps, IMobileMenuSta
         return (
             <div
                 className={`ms-Grid ms-bgColor-themePrimary ms-fontColor-themeLighter ${styles.container}`}
-                onTouchStart={this.props.handleTouched}>
+                onClick={this.props.handleTouched}
+            >
 
                 <div className="ms-Grid-row">
                     <div className="ms-Grid-col ms-sm12">
@@ -29,8 +33,6 @@ export class MobileMenu extends React.Component<IMobileMenuProps, IMobileMenuSta
             </div>
         );
     }
-
-
 
 
 }

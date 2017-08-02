@@ -28,6 +28,7 @@ export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelM
         super(props);
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
+        this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.handleTouched = this.handleTouched.bind(this);
     }
 
@@ -56,9 +57,8 @@ export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelM
                 } : {}}
 
                 onMouseEnter={this.handleMouseEnter}
-                onClick={this.handleMouseEnter}
-                onTouchStart={this.handleTouched}
-                onMouseLeave={this.props.handleLostFocus}
+                onClick={this.handleTouched}
+                onMouseLeave={this.handleMouseLeave}
             >
                 {this.props.topLevelMenu.text}
             </div>
@@ -66,11 +66,38 @@ export class TopLevelMenu extends React.Component<ITopLevelMenuProps, ITopLevelM
     }
 
     handleMouseEnter() {
-        this.props.handleFocused(this.props.topLevelMenu);
+
+        var responsiveMode = this.props.responsiveMode;
+        if (responsiveMode === undefined) {
+            responsiveMode = ResponsiveMode.large;
+        }
+        var mobileMode = responsiveMode < ResponsiveMode.large;
+
+        // Only respond to on mouse enter if we're not in mobile mode.
+        if (!mobileMode) {
+            this.props.handleFocused(this.props.topLevelMenu);
+        }
     }
+
 
     handleTouched() {
         this.props.handleTouched(this.props.topLevelMenu);
     }
+
+
+    handleMouseLeave() {
+
+        var responsiveMode = this.props.responsiveMode;
+        if (responsiveMode === undefined) {
+            responsiveMode = ResponsiveMode.large;
+        }
+        var mobileMode = responsiveMode < ResponsiveMode.large;
+
+        // Only handle mouse leave if not in mobile mode.
+        if (!mobileMode) {
+            this.props.handleLostFocus();
+        }
+    }
+
 
 }

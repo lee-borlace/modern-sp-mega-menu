@@ -109,6 +109,7 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
 
 
     handleFocusedTopLevelMenu(selectedTopLevelItem: TopLevelMenuModel) {
+        
         this.setState((prevState, props) => ({
             showFlyout: prevState.showFlyout,
             cursorInTopLevelMenu: true,
@@ -174,6 +175,8 @@ export class MegaMenu extends React.Component<IMegaMenuProps, IMegaMenuState> {
 
     handleMobileMenuTouched() {
         this.setState((prevState, props) => {
+
+            console.log("toggle");
 
             var showTopLevelMenuItemsWhenMobile = !prevState.showTopLevelMenuItemsWhenMobile;
 
