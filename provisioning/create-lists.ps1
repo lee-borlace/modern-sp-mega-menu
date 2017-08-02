@@ -1,6 +1,5 @@
 Param(
-  [string]$siteCollectionUrl,
-  [string]$gaId
+  [string]$siteCollectionUrl
 )
 
 Connect-PnPOnline -Url $siteCollectionUrl
