@@ -10,25 +10,45 @@ export class MegaMenuService {
 
     static readonly useSampleData: boolean = false;
 
-    static readonly level1ListName = "Mega Menu - Level 1";
-    static readonly level2ListName = "Mega Menu - Level 2";
-    static readonly level3ListName = "Mega Menu - Level 3";
+    static readonly level1ListName: string = "Mega Menu - Level 1";
+    static readonly level2ListName: string = "Mega Menu - Level 2";
+    static readonly level3ListName: string = "Mega Menu - Level 3";
 
-    // Get items for the menu.
+    static readonly cacheKey: string = "MegaMenuTopLevelItems";
+
+    // Get items for the menu and cache the result in session cache.
     public static getMenuItems(): Promise<TopLevelMenu[]> {
 
         if (!MegaMenuService.useSampleData) {
 
             return new Promise<TopLevelMenu[]>((resolve, reject) => {
 
-                var level1ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level1ListName);
-                var level2ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level2ListName);
-                var level3ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level3ListName);
+                // See if we've cached the result previously.
+                var topLevelItems: TopLevelMenu[] = pnp.storage.session.get(MegaMenuService.cacheKey);
 
-                Promise.all([level1ItemsPromise, level2ItemsPromise, level3ItemsPromise])
-                    .then((results: any[][]) => {
-                        resolve(MegaMenuService.convertItemsFromSp(results[0], results[1], results[2]));
-                    });
+                if (topLevelItems) {
+                    console.log("Found mega menu items in cache.");
+                    resolve(topLevelItems);
+                }
+                else {
+
+                    console.log("Didn't find mega menu items in cache, getting from list.");
+
+                    var level1ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level1ListName);
+                    var level2ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level2ListName);
+                    var level3ItemsPromise = MegaMenuService.getMenuItemsFromSp(MegaMenuService.level3ListName);
+
+                    Promise.all([level1ItemsPromise, level2ItemsPromise, level3ItemsPromise])
+                        .then((results: any[][]) => {
+
+                            topLevelItems = MegaMenuService.convertItemsFromSp(results[0], results[1], results[2]);
+
+                            // Store in session cache.
+                            pnp.storage.session.put(MegaMenuService.cacheKey, topLevelItems);
+
+                            resolve(topLevelItems);
+                        });
+                }
             });
         }
         else {
@@ -83,9 +103,9 @@ export class MegaMenuService {
             var newItem = {
                 id: item.Id,
                 heading: {
-                    text:item.Title,
-                    url:item.Url.Url,
-                    openInNewTab:item.OpenInNewTab
+                    text: item.Title,
+                    url: item.Url.Url,
+                    openInNewTab: item.OpenInNewTab
                 },
                 links: [],
                 level1ParentId: item.Level1ItemId
@@ -107,23 +127,25 @@ export class MegaMenuService {
         });
 
         // Now link the entities into the desired structure.
-        for(let l3 of level3Items){
+        for (let l3 of level3Items) {
             level2Dictionary[l3.level2ParentId].links.push(l3);
         }
 
-        for(let l2 of level2Items){
+        for (let l2 of level2Items) {
             level1Dictionary[l2.level1ParentId].columns.push(l2);
         }
 
-        var retVal:TopLevelMenu[] = [];
+        var retVal: TopLevelMenu[] = [];
 
-        for(let l1 of level1Items){
+        for (let l1 of level1Items) {
             retVal.push(l1);
         }
 
         return retVal;
 
     }
+
+
 
 
 
