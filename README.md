@@ -1,7 +1,7 @@
 # modern-sp-mega-menu
 
 ## Introduction
-_NOTE_ - This repo isn't being actively maintained! I put it together a couple of years ago while learning some concepts, but don't have the time to maintain it or look at issues myself. Hope you get some value nonetheless!*
+_NOTE_ - This repo isn't being actively maintained! It's probably not current anymore and there are probably better ways to do things now. I put it together a couple of years ago while learning some concepts, but don't have the time to maintain it or look at issues myself. Hope you get some value nonetheless!
 
 This is a mega menu for the modern SharePoint Online experience. It uses the preview version of SharePoint Framework Extensions. See [here](https://dev.office.com/sharepoint/docs/spfx/extensions/overview-extensions) for all info about getting SPFX extensions up and running e.g. toolchain, deploying to CDN etc.
 
